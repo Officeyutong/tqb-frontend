@@ -1,22 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { StateType } from "../states/Manager";
 import {
     Segment,
-    Image,
-    Container
+    Input,
+    Button
 } from "semantic-ui-react";
+import {
+    useDocumentTitle,
+    useInputValue
+} from "../common/Utils";
+
+import axios from "axios";
 const MainView: React.FC<{ state: StateType }> = (props) => {
-    const { state } = props;
-    const [loaded, setLoaded] = useState(false);
-    useEffect(() => {
-        if (!loaded) {
-            setLoaded(true);
-            document.title = "主页";
-        }
-    }, [loaded]);
+    // const { state } = props;
+    useDocumentTitle("主页");
+    const input = useInputValue("qwq");
+    const ping = async (text: string) => {
+        return (await axios.post("/echo", { text: text })).data;
+    };
     return <Segment stacked>
-        这里是主页.
+        <Input {...input}></Input>
+        <Button onClick={() => ping(input.value).then(s => console.log(s))}>
+            发送
+        </Button>
     </Segment>;
 };
 

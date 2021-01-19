@@ -1,14 +1,13 @@
 import { createStore, Action } from 'redux';
+import {UserInfoType} from "../service/User";
 
 const defaultState = {
     userState: {
         login: false,
-        userData: {
-            uid: -1,
-            username: "qwq",
-            displayname: "qwq",
-            loaded: false
-        }
+        userData: ({
+            username: "",
+            email: "",
+        } as UserInfoType)
     }
 };
 export type StateType = typeof defaultState;

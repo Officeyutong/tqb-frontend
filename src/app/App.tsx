@@ -1,59 +1,59 @@
 import React from "react";
 import axios from "axios";
-import { show } from "./dialogs/Dialog";
+import { show, showErrorModal } from "./dialogs/Dialog";
 import Router from "./Router";
 // import { store } from './states/Manager';
 import { Provider } from 'react-redux';
-import { makeUserStateUpdateAction, store } from "./states/Manager";
+import {store } from "./states/Manager";
 import 'semantic-ui-css/semantic.min.css'
 import { Container } from "semantic-ui-react";
+import { APIError } from "./Exception";
+import { user } from "./service/User";
 console.debug(process.env);
 const BACKEND_BASE_URL = process.env.REACT_APP_BASE_URL;
 console.debug(BACKEND_BASE_URL);
 axios.defaults.baseURL = BACKEND_BASE_URL;
 axios.defaults.withCredentials = true;
+axios.interceptors.request.use(req => {
+  if (user.getLoginState()) {
+    if (req.headers)
+      req.headers!.Authorization = user.getAuthHeader();
+    else req.headers = { Authorization: user.getAuthHeader() };
+  }
+  return req;
+});
 axios.interceptors.response.use(resp => {
+  let data = resp.data as {
+    success: boolean;
+    error: null | any;
+    data?: any;
+  };
+  if (!data.success) {
+    console.log(data);
+    showErrorModal(JSON.stringify(data.error));
+    throw new APIError(JSON.stringify(data.error));
+  }
+  resp.data = data.data;
   return resp;
 }, err => {
   let resp = err.response;
+  console.log(resp);
   if (resp)
-    show(resp.data, resp.status + " " + resp.statusText, true);
+    show(JSON.stringify(resp.data), resp.status + " " + resp.statusText, true);
   else
-    show(String(err), "发生错误", true);
+    show(JSON.stringify(err), "发生错误", true);
   throw err;
 });
-(async () => {
-  let resp = await axios.post("/api/user/query_login_state");
-  let data = resp.data as {
-    code: number;
-    data: {
-      login: boolean;
-      uid: number;
-      username: string;
-      displayname: string;
+user.loadState();
+// debugger;
+const App: React.FC<{}> = () => {
 
-    };
-    message?: string;
-  };
-  if (data.code) {
-    show(data.message || "错误", "错误", true);
-    return;
-  }
-  store.dispatch(makeUserStateUpdateAction(data.data.login, { uid: data.data.uid, displayname: data.data.displayname, username: data.data.username, loaded: true }))
-})();
-
-const App: React.FC<{}> = () => (
-  // <div style={{
-  //   // marginLeft: "10%",
-
-  // }}>
-
-  // </div>
-  <Container style={{ width: "80%" }}>
+  return <Container style={{ width: "80%" }}>
     <Provider store={store} >
       <Router></Router>
     </Provider>
-  </Container>
-);
+  </Container>;
+
+};
 
 export default App;
