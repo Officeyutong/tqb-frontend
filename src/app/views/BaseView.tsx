@@ -54,6 +54,7 @@ const BaseView: React.FC<BaseViewStateType> = (props) => {
                 <div>By TQB DevTeam</div>
                 <div><a href="https://github.com/Officeyutong/tqb-frontend">Frontend</a></div>
                 <div><a href="https://github.com/KSkun/tqb-backend">Backend</a></div>
+                <div><a href="https://beian.miit.gov.cn/">鄂ICP备2020017727号-1</a></div>
             </div>
         </Container>
     </Container>

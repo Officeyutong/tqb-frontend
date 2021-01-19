@@ -11,6 +11,7 @@ import LoginView from "./views/auth/LoginView";
 import RegisterView from "./views/auth/RegisterView";
 import ResetPasswordView from "./views/auth/ResetPasswordView";
 
+import DocView from "./views/DocView";
 type RouterStateType = {
     userState: StateType["userState"]
 };
@@ -37,7 +38,11 @@ const MyRouter: React.FC<{}> = () => {
                     <Route exact path="/register" component={RegisterView}></Route>
                     <Route exact path="/reset_password" component={ResetPasswordView}></Route>
                     <Route exact path="/" component={MainView}></Route>
-                    <Route path="*" exact component={View404}></Route>
+                    <Route exact path="/doc/tqb" render={() => <DocView path={require("../assets/docs/tqb.md").default} title="退群杯简介"></DocView>}></Route>
+                    <Route exact path="/doc/tqb-2nd" render={() => <DocView path={require("../assets/docs/tqb-2nd.md").default} title="第二届退群杯简介"></DocView>}></Route>
+                    <Route exact path="/doc/staff" render={() => <DocView path={require("../assets/docs/staff.md").default} title="Staff简介"></DocView>}></Route>
+                    <Route exact path="/doc/scene" render={() => <DocView path={require("../assets/docs/scene.md").default} title="剧情简介"></DocView>}></Route>
+                    <Route exact path="*" component={View404}></Route>
                 </Switch>
             </BaseView>
         </Switch>

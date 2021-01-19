@@ -1,5 +1,5 @@
 // import { encrypt } from "./jsencrypt-wrapper";
-import axios from "axios";
+import {axiosObj as axios} from "../App";
 import {
     makeUserStateUpdateAction, store
 } from "../states/Manager";

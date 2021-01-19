@@ -4,17 +4,21 @@ import { show, showErrorModal } from "./dialogs/Dialog";
 import Router from "./Router";
 // import { store } from './states/Manager';
 import { Provider } from 'react-redux';
-import {store } from "./states/Manager";
+import { store } from "./states/Manager";
 import 'semantic-ui-css/semantic.min.css'
 import { Container } from "semantic-ui-react";
 import { APIError } from "./Exception";
 import { user } from "./service/User";
+import "katex/dist/katex.min.css";
 console.debug(process.env);
 const BACKEND_BASE_URL = process.env.REACT_APP_BASE_URL;
+const axiosObj = axios.create({
+  baseURL: BACKEND_BASE_URL,
+  withCredentials: true
+});
+
 console.debug(BACKEND_BASE_URL);
-axios.defaults.baseURL = BACKEND_BASE_URL;
-axios.defaults.withCredentials = true;
-axios.interceptors.request.use(req => {
+axiosObj.interceptors.request.use(req => {
   if (user.getLoginState()) {
     if (req.headers)
       req.headers!.Authorization = user.getAuthHeader();
@@ -22,7 +26,7 @@ axios.interceptors.request.use(req => {
   }
   return req;
 });
-axios.interceptors.response.use(resp => {
+axiosObj.interceptors.response.use(resp => {
   let data = resp.data as {
     success: boolean;
     error: null | any;
@@ -57,3 +61,4 @@ const App: React.FC<{}> = () => {
 };
 
 export default App;
+export { axiosObj }
