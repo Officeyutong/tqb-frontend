@@ -40,8 +40,6 @@ class GameManager {
     async submitAnswer(option?: Array<number>, file?: string) {
         return (await axios.post("/question/:id/submission", { option: option, file: file })).data as { _id: string };
     }
-
-
 };
 
 const game = new GameManager();
