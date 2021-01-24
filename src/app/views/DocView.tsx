@@ -16,7 +16,7 @@ const DocView: React.FC<DocViewPropsType> = ({ path, title }) => {
     const [loaded, setLoaded] = useState(false);
     const [loading, setLoading] = useState(false);
     const [doc, setDoc] = useState("");
-    useDocumentTitle(title + " - 文档 - ");
+    useDocumentTitle(title + " - 文档");
     useEffect(() => {
         if (!loaded) {
             setLoading(true);

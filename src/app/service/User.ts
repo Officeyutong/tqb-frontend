@@ -1,5 +1,5 @@
 // import { encrypt } from "./jsencrypt-wrapper";
-import {axiosObj as axios} from "../App";
+import { axiosObj as axios } from "../App";
 import {
     makeUserStateUpdateAction, store
 } from "../states/Manager";
@@ -7,7 +7,10 @@ import NodeRSA from "node-rsa";
 const encrypt: (publicKey: string, plainText: string) => string = (publicKey: string, plainText: string) => {
     const key = new NodeRSA();
     key.setOptions({
-        encryptionScheme: "pkcs1_oaep"
+        encryptionScheme: {
+            scheme: "pkcs1_oaep",
+            hash: "sha256"
+        }
     });
     key.importKey(publicKey);
     return key.encrypt(plainText, "base64");

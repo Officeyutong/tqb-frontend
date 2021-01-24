@@ -1,5 +1,5 @@
 import { createStore, Action } from 'redux';
-import {UserInfoType} from "../service/User";
+import { UserInfoType } from "../service/User";
 
 const defaultState = {
     userState: {
@@ -8,6 +8,9 @@ const defaultState = {
             username: "",
             email: "",
         } as UserInfoType)
+    },
+    dataState: {
+        loaded: false
     }
 };
 export type StateType = typeof defaultState;
@@ -24,6 +27,20 @@ export function makeUserStateUpdateAction(login: boolean, userData: StateType["u
                 userState: {
                     login: login,
                     userData: userData
+                }
+            };
+            return result;
+        },
+    } as SimpleAction;
+}
+export function makeDataStateUpdateAction(loaded: boolean) {
+    return {
+        type: 'DATASTATE_UPDATE',
+        modify: (state: StateType) => {
+            let result = {
+                ...state,
+                dataState: {
+                    loaded: loaded
                 }
             };
             return result;
