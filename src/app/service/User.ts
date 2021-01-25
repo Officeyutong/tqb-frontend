@@ -38,6 +38,16 @@ class User {
     private alreadyLogin: boolean = false;
     private userState: UserStateType | null = null;
     private userInfo: UserInfoType | null = null;
+    finishedQuestion: Set<string> = new Set();
+    getFinishedQuestion() {
+        return this.finishedQuestion;
+    }
+    getUserState() {
+        return this.userState!;
+    }
+    getUserInfo() {
+        return this.userInfo!;
+    }
     logout() {
         this.alreadyLogin = false;
         this.userInfo = null;
@@ -61,6 +71,10 @@ class User {
     async loadUserInfo() {
         let resp = (await axios.get("/user")).data as UserInfoType;
         this.userInfo = resp;
+        this.finishedQuestion.clear();
+        for (const item of this.userInfo.finished_question) {
+            this.finishedQuestion.add(item);
+        }
     }
     async allocatePublicKey(email: string): Promise<string> {
         let tokenResp = (await axios.get("/user/public_key", { params: { email: email } })).data as {
@@ -116,18 +130,15 @@ class User {
             }
         }
     }
-    public loadState() {
+    public async loadState() {
         let data = (window.localStorage.getItem(LOCAL_STORAGE_KEY_NAME));
         if (data) {
             this.alreadyLogin = true;
             let user = JSON.parse(data) as LocalStoragePackageType;
             this.userState = user.userState;
             this.validate();
-            this.loadUserInfo().then(() => {
-                this.validate();
-                this.dispatchToStore();
-            });
-
+            await this.loadUserInfo();
+            this.dispatchToStore();
         }
     }
     public saveState() {

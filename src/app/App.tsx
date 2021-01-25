@@ -50,9 +50,13 @@ axiosObj.interceptors.response.use(resp => {
   throw err;
 });
 user.loadState();
-game.loadData().then(() => {
-  store.dispatch(makeDataStateUpdateAction(true));
-});
+(async () => {
+  await user.loadState();
+  if (user.getLoginState()) {
+    await game.loadData();
+    store.dispatch(makeDataStateUpdateAction(true));
+  }
+})();
 // debugger;
 const App: React.FC<{}> = () => {
 

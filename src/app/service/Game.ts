@@ -1,23 +1,44 @@
 import { axiosObj as axios } from "../App";
-import axiosRaw from "axios";
 import {
     Subject,
     Scene,
     Question,
     Submission
 } from "./GameTypes";
-
-type SceneList = Array<Scene<false> & { _id: string }>;
-type QuestionList = Array<Question<false> & { _id: string }>;
-type UnlockedSceneList = Array<Scene<true> & { _id: string }>;
+import {
+    user
+} from "./User";
+import _ from "lodash";
+type SceneListItem = Scene<false> & { _id: string };
+type QuestionListItem = Question<false> & { _id: string };
+type UnlockedSceneListItem = Scene<true> & { _id: string };
+type SceneList = Array<SceneListItem>;
+type QuestionList = Array<QuestionListItem>;
+type UnlockedSceneList = Array<UnlockedSceneListItem>;
 type UserSubmissionList = Array<Submission>;
-
+const MONGODB_NULL = "000000000000000000000000"; //24个0
 class GameManager {
     subjects: Array<Subject> = [];
     scenes: SceneList = [];
     questions: QuestionList = [];
     unlockedScenes: UnlockedSceneList = [];
     submissions: UserSubmissionList = [];
+    questionByID: Map<string, QuestionListItem> = new Map();
+    sceneByID: Map<string, SceneListItem> = new Map();
+    
+    public getSubjects() {
+        return this.subjects;
+    }
+    public getQuestionByID(id: string) {
+        return this.questionByID.get(id)!;
+    }
+    public getSceneByID(id: string) {
+        return this.sceneByID.get(id)!;
+    }
+    
+    public shouldChooseSubject(): boolean {
+        return user.getUserInfo().last_question === MONGODB_NULL && user.getUserInfo().last_scene === MONGODB_NULL;
+    }
     public isInitial(): boolean {
         return this.submissions.length === 0;
     }
@@ -27,6 +48,13 @@ class GameManager {
         this.questions = ((await axios.get("/question")).data as { question: QuestionList }).question;
         this.unlockedScenes = ((await axios.get("/user/unlocked_scene")).data as { scene: UnlockedSceneList }).scene;
         this.submissions = ((await axios.get("/user/submission")).data as { submission: UserSubmissionList }).submission;
+        for (const item of this.questions) {
+            this.questionByID.set(item._id, item);
+        }
+        for (const item of this.scenes) {
+            this.sceneByID.set(item._id, item);
+        }
+
     }
     async getSceneDetail(id: string) {
         return (await axios.get("/scene/" + id)).data as Scene<true>;
@@ -47,4 +75,4 @@ class GameManager {
 
 const game = new GameManager();
 
-export { game };
+export { game, MONGODB_NULL };

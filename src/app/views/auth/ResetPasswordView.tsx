@@ -82,7 +82,7 @@ const ResetPasswordView: React.FC<{}> = () => {
                     <Form as="div">
                         <Form.Input disabled={emailSended} label="电子邮箱" {...email}></Form.Input>
 
-                        <Form.Input disabled={emailSended} label="新密码" {...password}></Form.Input>
+                        <Form.Input disabled={emailSended} type="password" label="新密码" {...password}></Form.Input>
                         {emailSended && <Form.Input label="验证Token" {...token}></Form.Input>}
                         <Button disabled={countdown > 0} color="green" onClick={() => submit()}>{emailSended ? (countdown > 0 ? `${countdown}s` : "重发验证邮件") : "发送验证邮件"}</Button>
                         {emailSended && <Button color="blue" onClick={() => resetPassword()}>

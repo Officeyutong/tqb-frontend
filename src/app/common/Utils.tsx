@@ -1,9 +1,13 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { InputOnChangeData } from "semantic-ui-react";
 
+const wrapDocumentTitle = (title: string) => {
+    return `${title} - 退群杯`;
+};
+
 const useDocumentTitle: (title: string) => void = (title: string) => {
     useEffect(() => {
-        document.title = `${title} - 退群杯`;
+        document.title = wrapDocumentTitle(title);
         return () => { document.title = "退群杯" };
     }, [title]);
 };
@@ -19,5 +23,6 @@ const useInputValue: (text?: string) => { value: string; onChange: onChangeType 
 
 export {
     useDocumentTitle,
-    useInputValue
+    useInputValue,
+    wrapDocumentTitle
 };

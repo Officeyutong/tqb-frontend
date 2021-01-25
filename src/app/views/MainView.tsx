@@ -48,7 +48,7 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
             <Grid.Column>
                 <Grid columns="3">
                     {([
-                        { iconName: "play", url: "/game", text: "开始" },
+                        { iconName: "play", url: "/game/subject", text: "开始" },
                         { iconName: "signal", url: "/ranklist", text: "排行榜" },
                         { iconName: "help circle", url: "/doc/tqb", text: "退群杯简介" },
                         { iconName: "help circle", url: "/doc/tqb-2nd", text: "第二届退群杯简介" },

@@ -77,7 +77,7 @@ const RegisterView: React.FC<{}> = () => {
                     <Form as="div">
                         <Form.Input disabled={emailSended} label="电子邮箱" {...email}></Form.Input>
                         <Form.Input disabled={emailSended} label="用户名" {...username}></Form.Input>
-                        <Form.Input disabled={emailSended} label="密码" {...password}></Form.Input>
+                        <Form.Input disabled={emailSended} type="password" label="密码" {...password}></Form.Input>
                         {emailSended && <Form.Input label="验证Token" {...authToken}></Form.Input>}
                         <Button loading={loading} disabled={countdown > 0} color="green" onClick={() => submit()}>{emailSended ? (countdown > 0 ? `${countdown}s` : "重发验证邮件") : "发送验证邮件"}</Button>
                         {emailSended && <Button color="blue" onClick={() => auth()}>
