@@ -18,6 +18,9 @@ class GameManager {
     questions: QuestionList = [];
     unlockedScenes: UnlockedSceneList = [];
     submissions: UserSubmissionList = [];
+    public isInitial(): boolean {
+        return this.submissions.length === 0;
+    }
     async loadData() {
         this.subjects = ((await axios.get("/subject")).data as { subject: Array<Subject> }).subject;
         this.scenes = ((await axios.get("/scene")).data as { scene: SceneList }).scene;

@@ -122,6 +122,7 @@ class User {
             this.alreadyLogin = true;
             let user = JSON.parse(data) as LocalStoragePackageType;
             this.userState = user.userState;
+            this.validate();
             this.loadUserInfo().then(() => {
                 this.validate();
                 this.dispatchToStore();

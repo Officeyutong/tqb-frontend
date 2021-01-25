@@ -4,11 +4,12 @@ import { show, showErrorModal } from "./dialogs/Dialog";
 import Router from "./Router";
 // import { store } from './states/Manager';
 import { Provider } from 'react-redux';
-import { store } from "./states/Manager";
+import { store, makeDataStateUpdateAction } from "./states/Manager";
 import 'semantic-ui-css/semantic.min.css'
 import { Container } from "semantic-ui-react";
 import { APIError } from "./Exception";
 import { user } from "./service/User";
+import { game } from "./service/Game";
 import "katex/dist/katex.min.css";
 console.debug(process.env);
 const BACKEND_BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -49,6 +50,9 @@ axiosObj.interceptors.response.use(resp => {
   throw err;
 });
 user.loadState();
+game.loadData().then(() => {
+  store.dispatch(makeDataStateUpdateAction(true));
+});
 // debugger;
 const App: React.FC<{}> = () => {
 
