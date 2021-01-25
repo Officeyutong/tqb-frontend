@@ -9,9 +9,11 @@ import {
     user
 } from "./User";
 import _ from "lodash";
-type SceneListItem = Scene<false> & { _id: string };
-type QuestionListItem = Question<false> & { _id: string };
-type UnlockedSceneListItem = Scene<true> & { _id: string };
+
+type IDDecorator<T> = T & { _id: string };
+type SceneListItem = IDDecorator<Scene<false>>;
+type QuestionListItem = IDDecorator<Question<false>>;
+type UnlockedSceneListItem = IDDecorator<Scene<true>>;
 type SceneList = Array<SceneListItem>;
 type QuestionList = Array<QuestionListItem>;
 type UnlockedSceneList = Array<UnlockedSceneListItem>;
@@ -25,7 +27,7 @@ class GameManager {
     submissions: UserSubmissionList = [];
     questionByID: Map<string, QuestionListItem> = new Map();
     sceneByID: Map<string, SceneListItem> = new Map();
-    
+
     public getSubjects() {
         return this.subjects;
     }
@@ -35,7 +37,7 @@ class GameManager {
     public getSceneByID(id: string) {
         return this.sceneByID.get(id)!;
     }
-    
+
     public shouldChooseSubject(): boolean {
         return user.getUserInfo().last_question === MONGODB_NULL && user.getUserInfo().last_scene === MONGODB_NULL;
     }
