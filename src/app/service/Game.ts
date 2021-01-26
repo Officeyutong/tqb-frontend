@@ -9,7 +9,7 @@ import {
     user
 } from "./User";
 import _ from "lodash";
-
+import axiosRaw from "axios";
 type IDDecorator<T> = T & { _id: string };
 type SceneListItem = IDDecorator<Scene<false>>;
 type QuestionListItem = IDDecorator<Question<false>>;
@@ -45,11 +45,27 @@ class GameManager {
         return this.submissions.length === 0;
     }
     async loadData() {
-        this.subjects = ((await axios.get("/subject")).data as { subject: Array<Subject> }).subject;
-        this.scenes = ((await axios.get("/scene")).data as { scene: SceneList }).scene;
-        this.questions = ((await axios.get("/question")).data as { question: QuestionList }).question;
-        this.unlockedScenes = ((await axios.get("/user/unlocked_scene")).data as { scene: UnlockedSceneList }).scene;
-        this.submissions = ((await axios.get("/user/submission")).data as { submission: UserSubmissionList }).submission;
+        let resp = (await axiosRaw.all([
+            axios.get("/subject"),
+            axios.get("/scene"),
+            axios.get("/question"),
+            axios.get("/user/unlocked_scene"),
+            axios.get("/user/submission")
+        ])).map(item => item.data) as [
+                { subject: Array<Subject> },
+                { scene: SceneList },
+                { question: QuestionList },
+                { scene: UnlockedSceneList },
+                { submission: UserSubmissionList }
+            ];
+        [this.subjects, this.scenes, this.questions, this.unlockedScenes, this.submissions] = [
+            resp[0].subject,
+            resp[1].scene,
+            resp[2].question,
+            resp[3].scene,
+            resp[4].submission
+        ];
+
         for (const item of this.questions) {
             this.questionByID.set(item._id, item);
         }
@@ -78,3 +94,4 @@ class GameManager {
 const game = new GameManager();
 
 export { game, MONGODB_NULL };
+

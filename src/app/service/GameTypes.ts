@@ -7,6 +7,11 @@ enum QuestionStatus {
     ANSWERING = 1,
     SUBMITTED = 2
 };
+const QuestionStatusMapping = {
+    [QuestionStatus.LOCKED]: "未解锁",
+    [QuestionStatus.ANSWERING]: "正在作答",
+    [QuestionStatus.SUBMITTED]: "已提交"
+};
 interface SelectionSubquestion {
     type: SubQuestionType.SELECTION;
     desc: string;
@@ -63,10 +68,16 @@ interface Submission {
 export type {
     NonSelectionSubquestion,
     Question,
-    QuestionStatus,
+
     SelectionSubquestion,
-    SubQuestionType,
+
     Scene,
     Subject,
     Submission
 };
+
+export {
+    SubQuestionType,
+    QuestionStatus,
+    QuestionStatusMapping
+}
