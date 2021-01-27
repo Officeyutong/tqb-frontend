@@ -32,7 +32,7 @@ const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> =
                 'Content-Type': 'multipart/form-data'
             },
             onUploadProgress(evt) {
-                setPercent(evt.loaded / evt.total);
+                setPercent(evt.loaded / evt.total * 100);
             }
         })).data as { _id: string };
         setUploading(false);
