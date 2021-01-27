@@ -27,25 +27,30 @@ const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> =
         data.set("file", uploadElement.current!.files!.item(0)!);
         setUploading(true);
         setPercent(0);
-        const resp = (await axios.post("/file", data, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-            onUploadProgress(evt) {
-                setPercent(evt.loaded / evt.total * 100);
-            }
-        })).data as { _id: string };
-        setUploading(false);
-        updateSubmission(resp._id);
+        try {
+            const resp = (await axios.post("/file", data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                onUploadProgress(evt) {
+                    setPercent(evt.loaded / evt.total * 100);
+                }
+            })).data as { _id: string };
+            updateSubmission(resp._id);
+        } catch (ex) {
+
+        } finally {
+            setUploading(false);
+        }
+
+
     };
 
     return <div>
         <span>本题满分 {data.full_point}</span>
         <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.desc) }}></div>
         <Segment stacked>
-            <Dimmer active={uploading}>
-                <Progress percent={percent} indicating></Progress>
-            </Dimmer>
+
             <Grid columns="2">
                 <Grid.Column>
                     {userSubmission === null ? <div>
@@ -55,8 +60,21 @@ const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> =
                         </div>}
                 </Grid.Column>
                 <Grid.Column>
-                    <input type="file" ref={uploadElement}></input>
-                    <Button onClick={() => doUpload()} color="green" size="small" loading={uploading}>上传</Button>
+                    <Grid columns="1">
+                        <Grid.Column>
+                            <Grid columns="2">
+                                <Grid.Column><input type="file" ref={uploadElement}></input></Grid.Column>
+                                <Grid.Column>
+                                    <Button onClick={() => doUpload()} color="green" size="small" loading={uploading}>上传</Button>
+                                </Grid.Column>
+                            </Grid>
+                        </Grid.Column>
+                        <Grid.Column>
+                            {uploading && <Progress progress percent={percent} indicating></Progress>}
+                        </Grid.Column>
+                    </Grid>
+
+
                 </Grid.Column>
             </Grid>
         </Segment>

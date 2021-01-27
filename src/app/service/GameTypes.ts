@@ -33,7 +33,7 @@ type Question<withDetails> = {
 
 } & (withDetails extends true ? {
     desc: string;
-    subquestion: Array<SelectionSubquestion | NonSelectionSubquestion>;
+    sub_question: Array<SelectionSubquestion | NonSelectionSubquestion>;
     author: string;
     audio: string;
     time_limit: number;
