@@ -8,36 +8,55 @@ import {
 
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { wrapDocumentTitle } from "../../common/Utils";
-import { Button, Container, Dimmer, Divider, Header, Loader, Segment, Table, Rail, Sticky, Ref, Grid } from "semantic-ui-react";
-import { BACKEND_BASE_URL } from "../../App";
+import { Button, Container, Dimmer, Divider, Header, Loader, Segment, Table, Rail, Sticky, Ref, Grid, Progress } from "semantic-ui-react";
+import { BACKEND_BASE_URL, axiosObj as axios } from "../../App";
 type QuestionDetailType = Question<true>;
 
 type NonSelectionSubquestionProps = {
     data: NonSelectionSubquestion;
-    userSubmission: Submission[]; //用户已上传的提交ID，设置为null表示未上传过
+    userSubmission: string | null; //用户之前提交过的答案，如果未提交过则为null
     updateSubmission: (id: string) => void;
 };
 
 const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> = ({ data, updateSubmission, userSubmission }) => {
     const [uploading, setUploading] = useState(false);
-    const uploadElement = useRef(null);
+    const [percent, setPercent] = useState(0);
+    const uploadElement = useRef<HTMLInputElement>(null);
     const doUpload = async () => {
-
+        const data = new FormData();
+        data.set("file", uploadElement.current!.files!.item(0)!);
+        setUploading(true);
+        setPercent(0);
+        const resp = (await axios.post("/file", data, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            onUploadProgress(evt) {
+                setPercent(evt.loaded / evt.total);
+            }
+        })).data as { _id: string };
+        setUploading(false);
+        updateSubmission(resp._id);
     };
-    const lastSubmission = () => userSubmission[userSubmission.length - 1];
 
-    const lastSubmissionTime = () => new Date(lastSubmission().time * 1000).toLocaleString();
     return <div>
         <span>本题满分 {data.full_point}</span>
         <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.desc) }}></div>
         <Segment stacked>
+            <Dimmer active={uploading}>
+                <Progress percent={percent} indicating></Progress>
+            </Dimmer>
             <Grid columns="2">
                 <Grid.Column>
-                    {userSubmission.length === 0 ? <div>
+                    {userSubmission === null ? <div>
                         您尚未提交过本题
                     </div> : <div>
-                            您最后于{lastSubmissionTime()}提交过本题。 <a target="_blank" rel="noreferrer" href={`${BACKEND_BASE_URL}/file/${lastSubmission().file!}`}>点此下载</a>
+                            您提交过本题，<a target="_blank" rel="noreferrer" href={`${BACKEND_BASE_URL}/file/${userSubmission!}`}>点此下载</a>
                         </div>}
+                </Grid.Column>
+                <Grid.Column>
+                    <input type="file" ref={uploadElement}></input>
+                    <Button onClick={() => doUpload()} color="green" size="small" loading={uploading}>上传</Button>
                 </Grid.Column>
             </Grid>
         </Segment>
