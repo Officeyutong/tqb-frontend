@@ -2,6 +2,7 @@
 
 .env.production
 .eslintcache
+build.7z
 # dependencies
 /node_modules
 /.pnp
