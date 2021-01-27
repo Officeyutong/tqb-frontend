@@ -68,9 +68,7 @@ interface Submission {
 export type {
     NonSelectionSubquestion,
     Question,
-
     SelectionSubquestion,
-
     Scene,
     Subject,
     Submission

@@ -8,7 +8,6 @@ import {
 import {
     user
 } from "./User";
-import _ from "lodash";
 import axiosRaw from "axios";
 type IDDecorator<T> = T & { _id: string };
 type SceneListItem = IDDecorator<Scene<false>>;
@@ -65,10 +64,11 @@ class GameManager {
             resp[3].scene,
             resp[4].submission
         ];
-
+        this.questionByID.clear();
         for (const item of this.questions) {
             this.questionByID.set(item._id, item);
         }
+        this.sceneByID.clear();
         for (const item of this.scenes) {
             this.sceneByID.set(item._id, item);
         }

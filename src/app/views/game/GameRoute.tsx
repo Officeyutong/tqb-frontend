@@ -1,11 +1,10 @@
 import React from "react";
-import { Route, RouteComponentProps, withRouter, Redirect, RouteProps } from "react-router-dom";
+import { Route, RouteComponentProps, withRouter } from "react-router-dom";
 import ProblemView from "./ProblemView";
 import ScenePlayView from "./ScenePlayView";
 import SubjectChooseView from "./SubjectChooseView";
 import NextSceneChooseView from "./NextSceneChooseView";
-import { game } from "../../service/Game";
-
+import SubmissionListView from "./SubmissionListView";
 const GameRoute = withRouter(((props) => {
 
     return <>
@@ -13,7 +12,8 @@ const GameRoute = withRouter(((props) => {
         <Route exact path={`${props.match.path}/problem/:id`} component={ProblemView} />
         <Route exact path={`${props.match.path}/scene/:id`} component={ScenePlayView} />
         <Route exact path={`${props.match.path}/choose_scene/:problemID`} component={NextSceneChooseView} />
-        
+        <Route exact path={`${props.match.path}/submission_list/:id`} component={SubmissionListView} />
+
     </>;
 
 }) as React.FC<RouteComponentProps>);

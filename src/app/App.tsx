@@ -69,4 +69,4 @@ const App: React.FC<{}> = () => {
 };
 
 export default App;
-export { axiosObj }
+export { axiosObj, BACKEND_BASE_URL }

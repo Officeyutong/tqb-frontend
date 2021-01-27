@@ -4,7 +4,9 @@ import { useDocumentTitle } from "../common/Utils";
 import axios from "axios";
 import {
     Container,
+    Dimmer,
     Header,
+    Loader,
     Segment
 } from "semantic-ui-react";
 interface DocViewPropsType {
@@ -33,6 +35,12 @@ const DocView: React.FC<DocViewPropsType> = ({ path, title }) => {
             {title}
         </Header>
         <Segment stacked>
+            {loading && <>
+                <div style={{ height: "300px" }}></div>
+                <Dimmer active>
+                    <Loader></Loader>
+                </Dimmer>
+            </>}
             <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(doc) }}></div>
         </Segment>
     </Container>

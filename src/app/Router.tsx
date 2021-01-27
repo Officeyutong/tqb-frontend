@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Route, Switch, BrowserRouter as Router, RouteProps, Redirect, withRouter, RouteComponentProps } from "react-router-dom";
+import { Route, Switch, BrowserRouter as Router, RouteProps, withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { StateType } from "./states/Manager";
 import MainView from "./views/MainView";
