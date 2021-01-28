@@ -26,7 +26,9 @@ class GameManager {
     submissions: UserSubmissionList = [];
     questionByID: Map<string, QuestionListItem> = new Map();
     sceneByID: Map<string, SceneListItem> = new Map();
-
+    public getSubmissions() {
+        return this.submissions;
+    }
     public getSubjects() {
         return this.subjects;
     }
@@ -86,8 +88,8 @@ class GameManager {
     async startAnswer(id: string) {
         await axios.post(`/question/${id}/start`);
     }
-    async submitAnswer(option?: Array<number>, file?: string) {
-        return (await axios.post("/question/:id/submission", { option: option, file: file })).data as { _id: string };
+    async submitAnswer(questionID: string, option: Array<Array<number>>, file: Array<string>) {
+        return (await axios.post(`/question/${questionID}/submission`, { option: option, file: file })).data as { _id: string };
     }
 };
 

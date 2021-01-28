@@ -60,8 +60,8 @@ interface Submission {
         _id: string;
         title: string;
     };
-    file?: string;
-    option?: Array<number>;
+    file: Array<string>;
+    option: Array<Array<number>>;
     point: number;
 };
 
