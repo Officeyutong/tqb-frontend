@@ -36,7 +36,7 @@ const RanklistView: React.FC = () => {
             </Dimmer>
             {loaded && (data !== null) && <div>
                 <Item.Group divided>
-                    {data.map((item, i) => <><Item key={item.email}>
+                    {data.map((item, i) => <Item key={i}>
                         <Item.Image size="tiny" src={makeGravatarImageURL(item.email)}></Item.Image>
                         <Item.Content>
                             <Item.Header>
@@ -52,7 +52,7 @@ const RanklistView: React.FC = () => {
                             </Item.Description>
                         </Item.Content>
                     </Item>
-                    </>)}
+                    )}
                 </Item.Group>
             </div>}
         </Segment>

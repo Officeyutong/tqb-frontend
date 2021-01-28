@@ -55,7 +55,7 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
                         <Grid.Column></Grid.Column>
                         <Grid.Column textAlign="center">
                             {/*剧情跳转到题目不需要刷新数据*/}
-                            <Button onClick={() => history.push("/game/problem/" + data.next_question)} color="green">
+                            <Button onClick={() => history.push("/game/question/" + data.next_question)} color="green">
                                 前往问题 {game.getQuestionByID(data.next_question).title}
                             </Button>
                         </Grid.Column>

@@ -9,10 +9,10 @@ const GameRoute = withRouter(((props) => {
 
     return <>
         <Route exact path={`${props.match.path}/subject`} component={SubjectChooseView} />
-        <Route exact path={`${props.match.path}/problem/:id`} component={ProblemView} />
+        <Route exact path={`${props.match.path}/question/:id`} component={ProblemView} />
         <Route exact path={`${props.match.path}/scene/:id`} component={ScenePlayView} />
         <Route exact path={`${props.match.path}/choose_scene/:problemID`} component={NextSceneChooseView} />
-        <Route exact path={`${props.match.path}/submission_list/:id`} component={SubmissionListView} />
+        <Route exact path={`${props.match.path}/submission/:id?`} component={SubmissionListView} />
 
     </>;
 

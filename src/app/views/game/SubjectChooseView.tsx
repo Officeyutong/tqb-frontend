@@ -21,7 +21,7 @@ const SubjectChooseView: React.FC<{}> = () => {
             } else if (info.last_question === MONGODB_NULL && info.last_scene !== MONGODB_NULL) {
                 //last_question为NULL，last_scene不为NULL
                 //说明看完了初始剧情，但是还没做初始剧情指向的题目，应该跳到剧情指向的题目
-                history.push("/game/problem/" + game.getSceneByID(info.last_scene).next_question);
+                history.push("/game/question/" + game.getSceneByID(info.last_scene).next_question);
             } else if (info.last_question !== MONGODB_NULL && (info.last_scene === MONGODB_NULL || game.getSceneByID(info.last_scene).next_question === info.last_question)) {
                 //（题目不为NULL，剧情为NULL），或者（题目不为NULL，剧情不为NULL，并且剧情的下一道题指向last_question）
                 // 说明当前在做last_question或者已经做完了last_question但是没有选择出口剧情
@@ -31,7 +31,7 @@ const SubjectChooseView: React.FC<{}> = () => {
                 if (user.getFinishedQuestion().has(info.last_question)) {
                     history.push("/game/choose_scene/" + info.last_question);
                 } else {
-                    history.push("/game/problem/" + info.last_question);
+                    history.push("/game/question/" + info.last_question);
                 }
             } else if (info.last_question !== MONGODB_NULL && (game.getSceneByID(info.last_scene).from_question === info.last_question)) {
                 //题目不为NULL，剧情不为NULL，且剧情的来源题目为last_question
