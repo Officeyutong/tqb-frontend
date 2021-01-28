@@ -236,6 +236,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                                         setError={(x) => setError(error.map((val, j) => (j === i ? x : val)))}
                                                         userSubmission={mySubmissions[i] as (Array<number> | null)}
                                                         updateSubmission={(x) => setMySubmissions(mySubmissions.map((val, j) => (j === i ? x : val)))}
+                                                        allowEdit={true}
                                                     >
                                                     </SelectionSubquestionComponent> :
                                                         <NonSelectionSubquestionComponent
@@ -244,12 +245,34 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                                             setError={(x) => setError(error.map((val, j) => (j === i ? x : val)))}
                                                             userSubmission={mySubmissions[i] as (string | null)}
                                                             updateSubmission={(x) => setMySubmissions(mySubmissions.map((val, j) => (j === i ? x : val)))}
+                                                            allowEdit={true}
                                                         ></NonSelectionSubquestionComponent>}
                                                 </Segment>
                                             </div>)}
                                         </>
                                     case QuestionStatus.SUBMITTED:
                                         return <>
+                                            {data.sub_question.map((item, i) => <div key={i}>
+                                                <Segment stacked>
+                                                    {item.type === SubQuestionType.SELECTION ? <SelectionSubquestionComponent
+                                                        data={item}
+                                                        error={false}
+                                                        setError={(x) => { }}
+                                                        userSubmission={mySubmissions[i] as (Array<number> | null)}
+                                                        updateSubmission={(x) => { }}
+                                                        allowEdit={false}
+                                                    >
+                                                    </SelectionSubquestionComponent> :
+                                                        <NonSelectionSubquestionComponent
+                                                            data={item}
+                                                            error={false}
+                                                            setError={(x) => { }}
+                                                            userSubmission={mySubmissions[i] as (string | null)}
+                                                            updateSubmission={(x) => { }}
+                                                            allowEdit={false}
+                                                        ></NonSelectionSubquestionComponent>}
+                                                </Segment>
+                                            </div>)}
                                             <Segment stacked>
                                                 <Grid columns="3" centered>
                                                     <Grid.Column textAlign="center">

@@ -11,7 +11,7 @@ type NonSelectionSubquestionProps = {
     updateSubmission: (id: string) => void;
     error: boolean;
     setError: (val: boolean) => void;
-
+    allowEdit: boolean;
 };
 type SelectionSubquestionProps = {
     data: SelectionSubquestion;
@@ -19,9 +19,10 @@ type SelectionSubquestionProps = {
     updateSubmission: (val: Array<number>) => void;
     error: boolean;
     setError: (val: boolean) => void;
+    allowEdit: boolean;
 
 };
-const SelectionSubquestionComponent: React.FC<SelectionSubquestionProps> = ({ data, setError, updateSubmission, userSubmission, error }) => {
+const SelectionSubquestionComponent: React.FC<SelectionSubquestionProps> = ({ data, setError, updateSubmission, userSubmission, error, allowEdit }) => {
 
     const singleSelection = (data.full_point === 0);
     const toggleAndUpdate = (pos: number) => {
@@ -60,6 +61,7 @@ const SelectionSubquestionComponent: React.FC<SelectionSubquestionProps> = ({ da
                                             updateSubmission([i]);
                                             setError(false);
                                         }}
+                                        disabled={!allowEdit}
                                     >
                                         <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(item) }}></div>
                                     </Checkbox>
@@ -69,6 +71,7 @@ const SelectionSubquestionComponent: React.FC<SelectionSubquestionProps> = ({ da
                                     <Checkbox
                                         checked={userSubmission!.includes(i)}
                                         onChange={() => toggleAndUpdate(i)}
+                                        disabled={!allowEdit}
                                     >
                                         <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(item) }}></div>
                                     </Checkbox>
@@ -82,7 +85,7 @@ const SelectionSubquestionComponent: React.FC<SelectionSubquestionProps> = ({ da
         </Segment>
     </div>;
 };
-const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> = ({ data, updateSubmission, userSubmission, setError, error }) => {
+const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> = ({ data, updateSubmission, userSubmission, setError, error, allowEdit }) => {
     const [uploading, setUploading] = useState(false);
     const [percent, setPercent] = useState(0);
     const uploadElement = useRef<HTMLInputElement>(null);
@@ -141,7 +144,7 @@ const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> =
                         </div>}
                 </Grid.Column>
                 <Grid.Column>
-                    <Grid columns="1">
+                    {allowEdit && <Grid columns="1">
                         <Grid.Column>
                             <Grid columns="2">
                                 <Grid.Column>
@@ -155,7 +158,7 @@ const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> =
                         <Grid.Column>
                             {uploading && <Progress progress percent={percent} indicating></Progress>}
                         </Grid.Column>
-                    </Grid>
+                    </Grid>}
                 </Grid.Column>
             </Grid>
         </Segment>
