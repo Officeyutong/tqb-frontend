@@ -113,7 +113,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
     };
     const shouldUsePlayer: () => boolean = () => (data!.audio !== "");
     const shouldShowSubmitButton: () => boolean = () => {
-        if (data!.status != QuestionStatus.ANSWERING) return false;
+        if (data!.status !== QuestionStatus.ANSWERING) return false;
         if (data!.time_limit === 0) return true;
         const lastStart = user.getUserInfo().start_time;
         const now = parseInt(((new Date()).getTime() / 1000).toString());
@@ -133,7 +133,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
         if (now > lastStart + data!.time_limit) {
             return <div style={{ color: "red", fontSize: "large" }}>已超时</div>
         } else {
-            return <div style={{ color: "yellow", fontSize: "large" }}>{data!.time_limit - (now - lastStart)}秒</div>
+            return <div style={{ color: "orange", fontSize: "large" }}>{data!.time_limit - (now - lastStart)}秒</div>
         }
     };
     const doSubmit = async () => {
@@ -160,7 +160,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
             await game.submitAnswer(problemID, options, files);
             await game.loadData();
             await user.loadUserInfo();
-
+            history.push(`/game/choose_scene/${problemID}`);
         } catch (e) {
 
         } finally {
@@ -266,16 +266,18 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                             })()}
                             <Rail position="right">
                                 <Sticky context={stickyRef}>
-                                    <Segment stacked>
-                                        <Container textAlign="center">
-                                            <Header as="h3">时间限制</Header>
-                                        </Container>
-                                        <Grid columns="3" centered style={{ marginTop: "5px" }}>
-                                            <Grid.Row>
-                                                <Grid.Column textAlign="center">
-                                                    {makeRemainedTimeField()}</Grid.Column>
-                                            </Grid.Row>
-                                        </Grid>
+                                    {data.status !== QuestionStatus.LOCKED && <Segment stacked>
+                                        {<>
+                                            <Container textAlign="center">
+                                                <Header as="h3">时间限制</Header>
+                                            </Container>
+                                            <Grid columns="3" centered style={{ marginTop: "5px" }}>
+                                                <Grid.Row>
+                                                    <Grid.Column textAlign="center">
+                                                        {makeRemainedTimeField()}</Grid.Column>
+                                                </Grid.Row>
+                                            </Grid>
+                                        </>}
                                         {shouldShowSubmitButton() && <Grid columns="1" centered>
                                             <Grid.Column textAlign="center">
                                                 <Button color="green" loading={submitting} onClick={() => doSubmit()}>
@@ -283,7 +285,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                                 </Button>
                                             </Grid.Column>
                                         </Grid>}
-                                    </Segment>
+                                    </Segment>}
                                 </Sticky>
                             </Rail>
                         </div>

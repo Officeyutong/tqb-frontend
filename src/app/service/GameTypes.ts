@@ -27,7 +27,7 @@ interface NonSelectionSubquestion {
 };
 type Question<withDetails> = {
     title: string;
-    next_scene: Array<{ scene: string; option: string; }>;
+    
     status: QuestionStatus;
 
 
@@ -37,7 +37,8 @@ type Question<withDetails> = {
     author: string;
     audio: string;
     time_limit: number;
-} : {});
+    next_scene: Array<{ scene: string; option: string; }>;
+} : {next_scene: Array<string>;});
 interface Subject {
     abbr: string;
     name: string;

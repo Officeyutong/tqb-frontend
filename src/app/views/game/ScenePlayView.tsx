@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import { withRouter, RouteComponentProps, useHistory } from "react-router-dom";
 import { Scene } from "../../service/GameTypes";
-import { game } from "../../service/Game";
+import { game, MONGODB_NULL } from "../../service/Game";
 import { wrapDocumentTitle } from "../../common/Utils";
 import { Dimmer, Header, Loader, Segment, Grid, Divider, Button } from "semantic-ui-react";
 import {
     converter
 } from "../../common/Markdown";
+import { refreshUserAndGameData } from "../../App";
 type SceneDetail = Scene<true>;
 const ScenePlayView: React.FC<RouteComponentProps> = props => {
     const sceneID = (props.match.params as { id: string }).id;
@@ -20,6 +21,7 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
             (async () => {
                 setLoading(true);
                 let data = await game.getSceneDetail(sceneID);
+                await refreshUserAndGameData();
                 document.title = wrapDocumentTitle(`${data.title} - 剧情`)
                 setLoading(false);
                 setData(data);
@@ -46,18 +48,21 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
             </Header>
             <Segment stacked>
                 <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.text) }}></div>
-                <Divider></Divider>
-                <Grid columns="3">
-                    <Grid.Column></Grid.Column>
-                    <Grid.Column textAlign="center">
-                        {/*剧情跳转到题目不需要刷新数据*/}
-                        <Button onClick={() => history.push("/game/problem/" + data.next_question)} color="green">
-                            前往问题 {game.getQuestionByID(data.next_question).title}
-                        </Button>
-                    </Grid.Column>
-                    <Grid.Column></Grid.Column>
 
-                </Grid>
+                {data.next_question !== MONGODB_NULL && <>
+                    <Divider></Divider>
+                    <Grid columns="3">
+                        <Grid.Column></Grid.Column>
+                        <Grid.Column textAlign="center">
+                            {/*剧情跳转到题目不需要刷新数据*/}
+                            <Button onClick={() => history.push("/game/problem/" + data.next_question)} color="green">
+                                前往问题 {game.getQuestionByID(data.next_question).title}
+                            </Button>
+                        </Grid.Column>
+                        <Grid.Column></Grid.Column>
+
+                    </Grid>
+                </>}
             </Segment>
         </>}
     </div>

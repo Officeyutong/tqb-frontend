@@ -57,7 +57,10 @@ user.loadState();
     store.dispatch(makeDataStateUpdateAction(true));
   }
 })();
-// debugger;
+const refreshUserAndGameData = async () => {
+  await game.loadData();
+  await user.loadUserInfo();
+};
 const App: React.FC<{}> = () => {
 
   return <Container style={{ width: "80%" }}>
@@ -69,4 +72,4 @@ const App: React.FC<{}> = () => {
 };
 
 export default App;
-export { axiosObj, BACKEND_BASE_URL }
+export { axiosObj, BACKEND_BASE_URL, refreshUserAndGameData }
