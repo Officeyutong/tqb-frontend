@@ -11,7 +11,10 @@ import LoginView from "./views/auth/LoginView";
 import RegisterView from "./views/auth/RegisterView";
 import ResetPasswordView from "./views/auth/ResetPasswordView";
 
+import RanklistView from "./views/ranklist/RankListView";
+
 import GameRoute from "./views/game/GameRoute";
+
 
 import DocView from "./views/DocView";
 import { Dimmer, Loader, Segment } from "semantic-ui-react";
@@ -55,6 +58,8 @@ const MyRouter: React.FC<{}> = () => {
                     <Route exact path="/register" component={RegisterView}></Route>
                     <Route exact path="/reset_password" component={ResetPasswordView}></Route>
                     <Route exact path="/" component={MainView}></Route>
+                    <Route exact path="/ranklist" component={RanklistView}></Route>
+
                     <Route path="/doc">
                         <DocRoute></DocRoute>
                     </Route>
