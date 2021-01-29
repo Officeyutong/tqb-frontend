@@ -111,6 +111,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
         return () => {
             clearInterval(token);
         }
+        // eslint-disable-next-line
     }, [dummy, data]);
     const beforeAudioPlay = () => {
         if (shouldUsePlayer()) {

@@ -11,7 +11,6 @@ import {
 } from "semantic-ui-react";
 import {
     useDocumentTitle,
-    useInputValue
 } from "../common/Utils";
 
 import "./gnaq-button.css";
@@ -37,7 +36,6 @@ const GNAQButton: React.FC<{ iconName: SemanticICONS; url: string; text: string 
 
 const MainView: React.FC<{ state: StateType }> = (props) => {
     useDocumentTitle("主页");
-    const input = useInputValue("qwq");
     const debugReset = async () => {
         await axios.put("/user/refresh");
         window.location.reload();
