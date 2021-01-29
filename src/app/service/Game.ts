@@ -26,6 +26,16 @@ class GameManager {
     submissions: UserSubmissionList = [];
     questionByID: Map<string, QuestionListItem> = new Map();
     sceneByID: Map<string, SceneListItem> = new Map();
+    firstSubmission: Map<string, Submission> = new Map();
+    incomeScene: Map<string, SceneListItem> = new Map();
+    public getIncomeScene(id: string): SceneListItem | null {
+        const result = this.incomeScene.get(id);
+        return result ? result : null;
+    }
+    public getFirstSubmissionByQuestion(id: string): Submission | null {
+        const result = this.firstSubmission.get(id);
+        return result ? result : null;
+    }
     public getSubmissions() {
         return this.submissions;
     }
@@ -71,8 +81,14 @@ class GameManager {
             this.questionByID.set(item._id, item);
         }
         this.sceneByID.clear();
+        this.incomeScene.clear();
         for (const item of this.scenes) {
             this.sceneByID.set(item._id, item);
+            this.incomeScene.set(item.next_question, item);
+        }
+        this.firstSubmission.clear();
+        for (const item of this.submissions) {
+            this.firstSubmission.set(item.question._id, item);
         }
 
     }
@@ -97,3 +113,7 @@ const game = new GameManager();
 
 export { game, MONGODB_NULL };
 
+
+export type {
+    QuestionListItem
+};

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { game } from "../../service/Game";
+import { game, MONGODB_NULL } from "../../service/Game";
 import { Question, QuestionStatus, QuestionStatusMapping, Submission, SubQuestionType } from "../../service/GameTypes";
 import { user } from "../../service/User";
 import {
@@ -54,11 +54,13 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
             (async () => {
                 setLoading(true);
                 let data = await game.getQuestionDetail(problemID);
+                const lastStart = user.getUserInfo().start_time;
+                const now = parseInt(((new Date()).getTime() / 1000).toString());
+                if (now - lastStart >= data.time_limit) data.status = QuestionStatus.SUBMITTED; //我强行钦点
                 setLoading(false);
                 setData(data);
                 setLoaded(true);
                 document.title = wrapDocumentTitle(`${data.title} - 题目`);
-
                 setError(_.times(data.sub_question.length, _.constant(false)));
             })();
         }
@@ -91,13 +93,20 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
             if (data!.time_limit === 0) return false;
             const lastStart = user.getUserInfo().start_time;
             const now = parseInt(((new Date()).getTime() / 1000).toString());
-            if (now <= lastStart + data!.time_limit + 5) return true;
+            if (now <= lastStart + data!.time_limit) return true;
             return false;
         };
         let token = setInterval(() => {
             if (shouldTakeCountdown()) {
                 setDummy(x => !x);
-            } else clearInterval(token);
+            } else {
+                clearInterval(token);
+                if (data!.status === QuestionStatus.ANSWERING) {
+                    if (timeOuted()) {
+                        window.location.reload();
+                    }
+                }
+            }
         }, 1000);
         return () => {
             clearInterval(token);
@@ -113,7 +122,6 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                 player.currentTime = startTime; //提前三秒
                 console.debug("Player currentTime:", startTime);
                 showConfirm("请关闭这个对话框", () => audioRef.current!.play()); //Chrome限制，不跟网页做交互不能放声音
-
             });
         };
     }
@@ -180,6 +188,32 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
         } finally {
             setSubmitting(false);
         }
+    };
+    const lastQuestion: () => string | null = () => {
+        const fromScene = game.getIncomeScene(problemID);
+        if (fromScene!.from_question === MONGODB_NULL)
+            return null;
+        const lastProblem = game.getQuestionByID(fromScene!.from_question);
+        return lastProblem._id;
+    };
+    const shouldGoback: () => boolean = () => {//假设当前题目超时了，那么应该回退还是接着走
+        const lastQuestionID = lastQuestion();
+        if (!lastQuestionID) return false;
+        const lastProblem = game.getQuestionByID(lastQuestionID!);
+        for (const scene of lastProblem.next_scene.map(x => game.getSceneByID(x))) {
+            //枚举lastProblem的所有后继剧情所指向的题目
+            const submission = game.getFirstSubmissionByQuestion(scene.next_question);
+            const question = game.getQuestionByID(scene.next_question);
+            if (!submission || question.status === QuestionStatus.LOCKED) return true;
+        }
+        return false;
+    };
+    const timeOuted: () => boolean = () => {
+        if (data!.time_limit === 0) return false;
+        const lastStart = user.getUserInfo().start_time;
+        const now = parseInt(((new Date()).getTime() / 1000).toString());
+        if (now - lastStart >= data!.time_limit) return true;
+        return false;
     };
     return <div>
         {loading && (!loaded) && <Segment stacked>
@@ -291,7 +325,9 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                             <Segment stacked>
                                                 <Grid columns="3" centered>
                                                     <Grid.Column textAlign="center">
-                                                        <Button color="green" onClick={() => history.push(`/game/choose_scene/${problemID}`)}>前往后继剧情选择</Button>
+                                                        {shouldGoback() ? <>
+                                                            <Button color="green" onClick={() => history.push(`/game/choose_scene/${lastQuestion()}`)}>回退到上一题目的后继剧情选择</Button>
+                                                        </> : <Button color="green" onClick={() => history.push(`/game/choose_scene/${problemID}`)}>前往后继剧情选择</Button>}
                                                     </Grid.Column>
                                                 </Grid>
                                             </Segment>

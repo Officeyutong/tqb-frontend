@@ -64,6 +64,8 @@ interface Submission {
     file: Array<string>;
     option: Array<Array<number>>;
     point: number;
+    answer_time:number;//作答耗时
+    is_time_out:boolean;//是否答题超时
 };
 
 export type {

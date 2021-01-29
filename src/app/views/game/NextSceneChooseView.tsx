@@ -18,6 +18,7 @@ const NextSceneChooseView: React.FC<RouteComponentProps> = (props) => {
         if (!loaded) {
             (async () => {
                 setLoading(true);
+                await game.loadData();
                 let data = await game.getQuestionDetail(questionID);
                 setLoading(false);
                 setData(data);
@@ -51,7 +52,7 @@ const NextSceneChooseView: React.FC<RouteComponentProps> = (props) => {
                     {loaded && (data !== null) && <Grid columns="1">
                         {data.next_scene.map((item, i) => <Grid.Column key={i}>
                             <Button color="green" onClick={() => doUnlock(item.scene)}>
-                                {item.option}
+                                {item.option} {game.getFirstSubmissionByQuestion(game.getSceneByID(item.scene).next_question)?.is_time_out && "(已超时)"}
                             </Button>
                         </Grid.Column>)}
                     </Grid>}

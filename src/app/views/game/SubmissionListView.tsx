@@ -17,7 +17,7 @@ const SubmissionListView: React.FC<RouteComponentProps> = (props) => {
                 <Table basic="very" celled collapsing style={{ width: "100%" }}>
                     <Table.Header>
                         <Table.Row>
-                            {["提交时间", "题目", "得分"].map((item, i) => <Table.HeaderCell textAlign='center' key={i}>{item}</Table.HeaderCell>)}
+                            {["提交时间", "题目", "答题用时", "是否超时", "得分"].map((item, i) => <Table.HeaderCell textAlign='center' key={i}>{item}</Table.HeaderCell>)}
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
@@ -25,6 +25,8 @@ const SubmissionListView: React.FC<RouteComponentProps> = (props) => {
                             {[
                                 <div>{new Date(item.time * 1000).toLocaleString()}</div>,
                                 <a rel="noreferrer" target="_blank" href={`/game/question/${item.question._id}`}>{item.question.title}</a>,
+                                <div>{item.answer_time} 秒</div>,
+                                <div>{item.is_time_out ? "是" : "否"}</div>,
                                 <div>{item.point === -1 ? "未评分" : item.point}</div>
                             ].map((item, i) => <Table.Cell textAlign="center" key={i} children={item}></Table.Cell>)}
                         </Table.Row>)}
