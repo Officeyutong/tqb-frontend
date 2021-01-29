@@ -12,7 +12,7 @@ import { Button, Container, Dimmer, Header, Loader, Segment, Table, Rail, Sticky
 
 import _ from "lodash";
 import { NonSelectionSubquestionComponent, SelectionSubquestionComponent } from "./ProblemViewUtils";
-import { showErrorModal } from "../../dialogs/Dialog";
+import { showConfirm, showErrorModal } from "../../dialogs/Dialog";
 type QuestionDetailType = Question<true>;
 type SubmissionListType = (Array<number> | string | null)[];
 
@@ -79,15 +79,15 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
         if (audioLoaded) {
             //执行到这的时候只能是audioLoaded从false到true
             console.log("Audio loaded.");
-            const lastStart = user.getUserInfo().start_time;
-            const now = parseInt(((new Date()).getTime() / 1000).toString());
-            const player = audioRef.current!;
-            player.currentTime = Math.max(now - lastStart - 3, 0); //提前三秒
+            //加载完音频，如果是继续做题那就直接开始放
+            if (data!.status === QuestionStatus.ANSWERING) beforeAudioPlay();
         }
+        // eslint-disable-next-line
     }, [audioLoaded]);
     useEffect(() => {
         const shouldTakeCountdown: () => boolean = () => {
             // return true;
+            if (!data) return false;
             if (data!.time_limit === 0) return false;
             const lastStart = user.getUserInfo().start_time;
             const now = parseInt(((new Date()).getTime() / 1000).toString());
@@ -103,13 +103,27 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
             clearInterval(token);
         }
     }, [dummy, data]);
+    const beforeAudioPlay = () => {
+        if (shouldUsePlayer()) {
+            user.loadUserInfo().then(() => {
+                const lastStart = user.getUserInfo().start_time;
+                const now = parseInt(((new Date()).getTime() / 1000).toString());
+                const player = audioRef.current!;
+                const startTime = Math.max(now - lastStart - 3, 0);
+                player.currentTime = startTime; //提前三秒
+                console.debug("Player currentTime:", startTime);
+                showConfirm("请关闭这个对话框", () => audioRef.current!.play()); //Chrome限制，不跟网页做交互不能放声音
+
+            });
+        };
+    }
     const startAnswer = async () => {
         setLoading(true);
         await game.startAnswer(problemID);
         await user.loadUserInfo();
-        await game.loadData();
         setData(await game.getQuestionDetail(problemID));
         setLoading(false);
+        beforeAudioPlay(); //开始作答的时候，播放录音
     };
     const shouldUsePlayer: () => boolean = () => (data!.audio !== "");
     const shouldShowSubmitButton: () => boolean = () => {
@@ -205,16 +219,22 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                     </Table>
                                 })()}
                                 <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.desc) }}></div>
-                                {shouldUsePlayer() && <audio ref={audioRef} src={data.audio}>
+                                {shouldUsePlayer() && <audio ref={audioRef} src={data.audio} controls={data.time_limit === 0 || true}>
                                 </audio>}
                             </Segment>
+                            {shouldUsePlayer() && (!audioLoaded) && <Segment>
+                                <Dimmer active>
+                                    <Loader>加载音频文件中...</Loader>
+                                </Dimmer>
+                                <div style={{ height: "400px" }}></div>
+                            </Segment>}
                             {(() => {
                                 switch (data.status) {
                                     case QuestionStatus.LOCKED:
                                         return <>
                                             <Segment stacked>
                                                 <Container textAlign="center">
-                                                    <Button color="green" size="large" onClick={() => startAnswer()}>
+                                                    <Button color="green" size="large" disabled={shouldUsePlayer() && (!audioLoaded)} onClick={() => startAnswer()}>
                                                         开始作答
                                                 </Button>
                                                 </Container>
@@ -222,13 +242,8 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                         </>;
                                     case QuestionStatus.ANSWERING:
                                         return <>
-                                            {shouldUsePlayer() && <Segment>
-                                                <Dimmer active={!audioLoaded}>
-                                                    <Loader>加载音频文件中...</Loader>
-                                                </Dimmer>
-                                                <div style={{ height: "400px" }}></div>
-                                            </Segment>}
-                                            {data.sub_question.map((item, i) => <div key={i}>
+
+                                            {(shouldUsePlayer() ? audioLoaded : true) && data.sub_question.map((item, i) => <div key={i}>
                                                 <Segment stacked>
                                                     {item.type === SubQuestionType.SELECTION ? <SelectionSubquestionComponent
                                                         data={item}

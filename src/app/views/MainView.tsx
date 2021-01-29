@@ -19,14 +19,13 @@ import "./gnaq-button.css";
 import { axiosObj as axios } from "../App";
 import { Link } from "react-router-dom";
 const GNAQButton: React.FC<{ iconName: SemanticICONS; url: string; text: string }> = ({ iconName, text, url }) => {
-    return <Link to={url}  style={{color:"#1b1c1d"}}>
+    return <Link to={url} style={{ color: "#1b1c1d" }}>
         <div className="gnaq-main-button" style={{ cursor: "pointer" }}>
             <div className="gnaq-mn-btn-logo-hover">
                 <div className="gnaq-mn-btn-logo">
                     <Icon aria-hidden="true" name={iconName as SemanticICONS}></Icon>
                 </div>
             </div>
-
             <div className="gnaq-mn-btn-text-hover">
                 <div className="gnaq-mn-btn-text">
                     {text}
@@ -37,11 +36,11 @@ const GNAQButton: React.FC<{ iconName: SemanticICONS; url: string; text: string 
 };
 
 const MainView: React.FC<{ state: StateType }> = (props) => {
-    // const { state } = props;
     useDocumentTitle("主页");
     const input = useInputValue("qwq");
-    const ping = async (text: string) => {
-        return (await axios.post("/echo", { text: text })).data;
+    const debugReset = async () => {
+        await axios.put("/user/refresh");
+        window.location.reload();
     };
     return <Segment stacked>
         <Grid columns="2">
@@ -64,8 +63,8 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
             </Grid.Column>
             <Grid.Column>
                 <Input {...input}></Input>
-                <Button onClick={() => ping(input.value).then(s => console.log(s))}>
-                    发送
+                <Button onClick={() => debugReset()}>
+                    重置数据
                 </Button>
             </Grid.Column>
         </Grid>

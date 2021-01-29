@@ -56,7 +56,7 @@ class User {
         this.dispatchToStore();
     }
     dispatchToStore() {
-        console.log("dispatch", this.userInfo);
+        // console.debug("dispatch", this.userInfo);
         store.dispatch(makeUserStateUpdateAction(
             this.alreadyLogin,
             { ...(this.userInfo || { email: "", username: "", _id: "", finished_question: [], is_email_verified: false, last_question: "", last_scene: "", start_time: -1, unlocked_scene: [] }) }

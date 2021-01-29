@@ -43,27 +43,27 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
 
         </Segment>}
         {(loaded && data !== null) && <>
-            <Header as="h1">
-                {data!.title}
-            </Header>
-            <Segment stacked>
-                <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.text) }}></div>
 
-                {data.next_question !== MONGODB_NULL && <>
-                    <Divider></Divider>
-                    <Grid columns="3">
-                        <Grid.Column></Grid.Column>
-                        <Grid.Column textAlign="center">
-                            {/*剧情跳转到题目不需要刷新数据*/}
-                            <Button onClick={() => history.push("/game/question/" + data.next_question)} color="green">
-                                前往问题 {game.getQuestionByID(data.next_question).title}
-                            </Button>
-                        </Grid.Column>
-                        <Grid.Column></Grid.Column>
 
-                    </Grid>
-                </>}
-            </Segment>
+            <Grid columns="3" centered>
+                <Grid.Row>
+                    <Grid.Column textAlign="center">
+                        <Header as="h1">
+                            {data!.title}
+                        </Header>
+                        <Segment stacked>
+                            <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.text) }}></div>
+
+                            {data.next_question !== MONGODB_NULL && <>
+                                <Divider></Divider>
+                                <Button onClick={() => history.push("/game/question/" + data.next_question)} color="green">
+                                    前往问题 {game.getQuestionByID(data.next_question).title}
+                                </Button>
+                            </>}
+                        </Segment>
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
         </>}
     </div>
 };

@@ -51,35 +51,23 @@ const SelectionSubquestionComponent: React.FC<SelectionSubquestionProps> = ({ da
                 </Grid.Column>
                 <Grid.Column>
                     <Form>
-                        {(() => {
-                            if (singleSelection) {
-                                return data.option.map((item, i) => <Form.Field key={i}>
-                                    <Checkbox
-                                        radio
-                                        checked={userSubmission!.includes(i)}
-                                        onChange={() => {
-                                            updateSubmission([i]);
-                                            setError(false);
-                                        }}
-                                        disabled={!allowEdit}
-                                    >
-                                        <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(item) }}></div>
-                                    </Checkbox>
-                                </Form.Field>)
-                            } else {
-                                return data.option.map((item, i) => <Form.Field key={i}>
-                                    <Checkbox
-                                        checked={userSubmission!.includes(i)}
-                                        onChange={() => toggleAndUpdate(i)}
-                                        disabled={!allowEdit}
-                                    >
-                                        <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(item) }}></div>
-                                    </Checkbox>
-                                </Form.Field>)
-                            }
-                        })()}
-                    </Form>
+                        {data.option.map((item, i) => <Form.Field style={{ display: "flex" }} key={i}>
+                            <Checkbox
+                                radio={singleSelection}
+                                checked={userSubmission?.includes(i)}
+                                onChange={() => {
+                                    if (singleSelection) updateSubmission([i]);
+                                    else toggleAndUpdate(i);
+                                    setError(false);
+                                }}
+                                disabled={!allowEdit}
+                            // label={}
+                            >
 
+                            </Checkbox>
+                            <div style={{ marginLeft: "5px" }} dangerouslySetInnerHTML={{ __html: converter.makeHtml(item) }}></div>
+                        </Form.Field>)}
+                    </Form>
                 </Grid.Column>
             </Grid>
         </Segment>

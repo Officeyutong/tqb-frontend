@@ -37,23 +37,28 @@ const NextSceneChooseView: React.FC<RouteComponentProps> = (props) => {
         }
     };
     return <div>
-        <Header as="h1">
-            题目 {game.getQuestionByID(questionID).title} 的后继剧情选择
-        </Header>
-        <Segment stacked>
-            <Dimmer active={loading}>
-                <Loader>
-                    加载中...
-                </Loader>
-            </Dimmer>
-            {loaded && (data !== null) && <Grid columns="1">
-                {data.next_scene.map((item, i) => <Grid.Column key={i}>
-                    <Button color="green" onClick={() => doUnlock(item.scene)}>
-                        {item.option}
-                    </Button>
-                </Grid.Column>)}
-            </Grid>}
-        </Segment>
+        <Grid columns="3" centered>
+            <Grid.Column textAlign="center">
+                <Header as="h1">
+                    题目 {game.getQuestionByID(questionID).title} 的后继剧情选择
+                </Header>
+                <Segment stacked>
+                    <Dimmer active={loading}>
+                        <Loader>
+                            加载中...
+                        </Loader>
+                    </Dimmer>
+                    {loaded && (data !== null) && <Grid columns="1">
+                        {data.next_scene.map((item, i) => <Grid.Column key={i}>
+                            <Button color="green" onClick={() => doUnlock(item.scene)}>
+                                {item.option}
+                            </Button>
+                        </Grid.Column>)}
+                    </Grid>}
+                </Segment>
+            </Grid.Column>
+        </Grid>
+
     </div>;
 }
 

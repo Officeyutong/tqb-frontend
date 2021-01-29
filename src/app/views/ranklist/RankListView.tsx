@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dimmer, Divider, Grid, Header, Item, Loader, Segment, Statistic } from "semantic-ui-react";
+import { Dimmer, Header, Item, Loader, Segment, Statistic } from "semantic-ui-react";
 import { axiosObj as axios } from "../../App";
 import { makeGravatarImageURL, useDocumentTitle } from "../../common/Utils";
 
