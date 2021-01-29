@@ -71,7 +71,6 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                     </Grid>
                 </Grid.Column>
                 <Grid.Column>
-                    <Input {...input}></Input>
                     <Button onClick={() => debugReset()}>
                         重置数据
                 </Button>
