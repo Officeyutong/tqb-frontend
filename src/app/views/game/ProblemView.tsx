@@ -56,7 +56,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                 let data = await game.getQuestionDetail(problemID);
                 const lastStart = user.getUserInfo().start_time;
                 const now = parseInt(((new Date()).getTime() / 1000).toString());
-                if (now - lastStart >= data.time_limit) data.status = QuestionStatus.SUBMITTED; //我强行钦点
+                if (now - lastStart >= data.time_limit && data.time_limit !== 0 && data.status === QuestionStatus.ANSWERING) data.status = QuestionStatus.SUBMITTED; //我强行钦点
                 setLoading(false);
                 setData(data);
                 setLoaded(true);
@@ -203,9 +203,9 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
         const lastProblem = game.getQuestionByID(lastQuestionID!);
         for (const scene of lastProblem.next_scene.map(x => game.getSceneByID(x))) {
             //枚举lastProblem的所有后继剧情所指向的题目
-            const submission = game.getFirstSubmissionByQuestion(scene.next_question);
+            // const submission = game.getFirstSubmissionByQuestion(scene.next_question);
             const question = game.getQuestionByID(scene.next_question);
-            if (!submission || question.status === QuestionStatus.LOCKED) return true;
+            if (question.status === QuestionStatus.LOCKED && question._id !== problemID) return true;
         }
         return false;
     };
@@ -254,7 +254,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                     </Table>
                                 })()}
                                 <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.desc) }}></div>
-                                {shouldUsePlayer() && <audio ref={audioRef} src={data.audio} controls={data.time_limit === 0 || true}>
+                                {shouldUsePlayer() && <audio ref={audioRef} src={data.audio} controls={data.time_limit === 0}>
                                 </audio>}
                             </Segment>
                             {shouldUsePlayer() && (!audioLoaded) && <Segment>
