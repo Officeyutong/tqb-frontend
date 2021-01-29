@@ -13,6 +13,7 @@ import { game } from "./service/Game";
 import "katex/dist/katex.min.css";
 console.debug(process.env);
 const BACKEND_BASE_URL = process.env.REACT_APP_BASE_URL;
+const DEBUG_MODE = process.env.NODE_ENV === "development";
 const axiosObj = axios.create({
   baseURL: BACKEND_BASE_URL,
   withCredentials: true
@@ -72,4 +73,4 @@ const App: React.FC<{}> = () => {
 };
 
 export default App;
-export { axiosObj, BACKEND_BASE_URL, refreshUserAndGameData }
+export { axiosObj, BACKEND_BASE_URL, refreshUserAndGameData, DEBUG_MODE }

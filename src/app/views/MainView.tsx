@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { StateType } from "../states/Manager";
 import {
     Segment,
-    Input,
     Button,
     Grid,
     Icon,
@@ -17,7 +16,7 @@ import {
 
 import "./gnaq-button.css";
 
-import { axiosObj as axios } from "../App";
+import { axiosObj as axios, DEBUG_MODE } from "../App";
 import { Link } from "react-router-dom";
 const GNAQButton: React.FC<{ iconName: SemanticICONS; url: string; text: string }> = ({ iconName, text, url }) => {
     return <Link to={url} style={{ color: "#1b1c1d" }}>
@@ -71,9 +70,9 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                     </Grid>
                 </Grid.Column>
                 <Grid.Column>
-                    <Button onClick={() => debugReset()}>
+                    {DEBUG_MODE && <Button onClick={() => debugReset()}>
                         重置数据
-                </Button>
+                    </Button>}
                 </Grid.Column>
             </Grid>
         </Segment>
