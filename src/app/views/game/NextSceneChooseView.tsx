@@ -51,7 +51,7 @@ const NextSceneChooseView: React.FC<RouteComponentProps> = (props) => {
                     </Dimmer>
                     {loaded && (data !== null) && <Grid columns="1">
                         {data.next_scene.map((item, i) => <Grid.Column key={i}>
-                            <Button color="green" onClick={() => doUnlock(item.scene)}>
+                            <Button color="blue" onClick={() => doUnlock(item.scene)}>
                                 {item.option} {game.getFirstSubmissionByQuestion(game.getSceneByID(item.scene).next_question)?.is_time_out && "(已超时)"}
                             </Button>
                         </Grid.Column>)}

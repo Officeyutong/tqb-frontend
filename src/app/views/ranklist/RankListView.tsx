@@ -44,7 +44,7 @@ const RanklistView: React.FC = () => {
                             </Item.Header>
                             <Item.Meta>{item.email}</Item.Meta>
                             <Item.Description>
-                                <Statistic color="green">
+                                <Statistic color="blue">
                                     <Statistic.Value>
                                         {item.point}
                                     </Statistic.Value>

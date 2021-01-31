@@ -54,7 +54,7 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
 
                             {data.next_question !== MONGODB_NULL && <>
                                 <Divider></Divider>
-                                <Button onClick={() => history.push("/game/question/" + data.next_question)} color="green">
+                                <Button onClick={() => history.push("/game/question/" + data.next_question)} color="blue">
                                     前往问题 {game.getQuestionByID(data.next_question).title}
                                 </Button>
                             </>}

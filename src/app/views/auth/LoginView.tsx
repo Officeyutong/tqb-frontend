@@ -44,7 +44,7 @@ const LoginView: React.FC<{}> = () => {
                         <Form as="div">
                             <Form.Input label="电子邮箱" onChange={e => setEmail(e.target.value)} value={email}></Form.Input>
                             <Form.Input label="密码" onChange={e => setPassword(e.target.value)} value={password} type="password"></Form.Input>
-                            <Button loading={loading} as="div" color="green" onClick={submit}>提交</Button>
+                            <Button loading={loading} as="div" color="blue" onClick={submit}>提交</Button>
                         </Form>
                     </Segment>
                 </Grid.Column>

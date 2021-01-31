@@ -68,7 +68,7 @@ class MyMessageBox extends React.Component<PropType, StateType> {
                 </Modal.Content>
                 <Modal.Actions>
                     {this.state.withReturnToHome && <Button as="a" color="blue" href="/">返回主页</Button>}
-                    <Button color="green" onClick={() => this.setState({ showing: false })}>关闭</Button>
+                    <Button color="blue" onClick={() => this.setState({ showing: false })}>关闭</Button>
                 </Modal.Actions>
             </Modal>
         </Transition>);

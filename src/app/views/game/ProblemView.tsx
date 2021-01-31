@@ -271,7 +271,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                         return <>
                                             <Segment stacked>
                                                 <Container textAlign="center">
-                                                    <Button color="green" size="large" disabled={shouldUsePlayer() && (!audioLoaded)} onClick={() => startAnswer()}>
+                                                    <Button color="blue" size="large" disabled={shouldUsePlayer() && (!audioLoaded)} onClick={() => startAnswer()}>
                                                         开始作答
                                                 </Button>
                                                 </Container>
@@ -331,8 +331,8 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                                 <Grid columns="3" centered>
                                                     <Grid.Column textAlign="center">
                                                         {shouldGoback() ? <>
-                                                            <Button color="green" onClick={() => history.push(`/game/choose_scene/${lastQuestion()}`)}>回退到上一题目的后继剧情选择</Button>
-                                                        </> : <Button color="green" onClick={() => history.push(`/game/choose_scene/${problemID}`)}>前往后继剧情选择</Button>}
+                                                            <Button color="blue" onClick={() => history.push(`/game/choose_scene/${lastQuestion()}`)}>回退到上一题目的后继剧情选择</Button>
+                                                        </> : <Button color="blue" onClick={() => history.push(`/game/choose_scene/${problemID}`)}>前往后继剧情选择</Button>}
                                                     </Grid.Column>
                                                 </Grid>
                                             </Segment>
@@ -359,7 +359,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                         </>}
                                         {shouldShowSubmitButton() && <Grid columns="1" centered>
                                             <Grid.Column textAlign="center">
-                                                <Button color="green" loading={submitting} onClick={() => doSubmit()}>
+                                                <Button color="blue" loading={submitting} onClick={() => doSubmit()}>
                                                     提交
                                                 </Button>
                                             </Grid.Column>

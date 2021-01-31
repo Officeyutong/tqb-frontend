@@ -55,7 +55,7 @@ const SubjectChooseView: React.FC<{}> = () => {
                 <Loader></Loader>
             </Dimmer>
             <ButtonGroup>
-                {game.getSubjects().map(item => <Button key={item.name} color="green" onClick={() => chooseSubject(item.start_scene)}>
+                {game.getSubjects().map(item => <Button key={item.name} color="blue" onClick={() => chooseSubject(item.start_scene)}>
                     {item.abbr}
                 </Button>)}
             </ButtonGroup>

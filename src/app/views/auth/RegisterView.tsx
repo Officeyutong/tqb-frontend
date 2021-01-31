@@ -67,27 +67,30 @@ const RegisterView: React.FC<{}> = () => {
         }
     };
     return <Container>
-        <Grid columns="3">
-            <Grid.Column></Grid.Column>
+        <Grid columns="3" centered>
             <Grid.Column>
                 <Header as="h1">
                     注册
                 </Header>
-                <Segment stacked >
+                {(!emailSended) && <Segment stacked >
                     <Form as="div">
                         <Form.Input disabled={emailSended} label="电子邮箱" {...email}></Form.Input>
                         <Form.Input disabled={emailSended} label="用户名" {...username}></Form.Input>
                         <Form.Input disabled={emailSended} type="password" label="密码" {...password}></Form.Input>
-                        {<Form.Input label="验证码" action={
-                            <Button loading={loading} disabled={countdown > 0} color="green" onClick={() => submit()}>{emailSended ? (countdown > 0 ? `${countdown}s` : "重发验证邮件") : "发送验证邮件"}</Button>
-                        } {...authToken}></Form.Input>}
-                        {emailSended && <Button color="blue" onClick={() => auth()}>
-                            提交验证
-                            </Button>}
+                        <Button loading={loading} color="green" onClick={() => submit()}>发送验证邮件</Button>
                     </Form>
-                </Segment>
+                </Segment>}
+                {emailSended && <Segment stacked>
+                    <Form as="div">
+                        <Form.Input label="验证码" action={
+                            <Button loading={loading} disabled={countdown > 0} color="green" onClick={() => submit()}>{emailSended ? (countdown > 0 ? `${countdown}s` : "重发验证邮件") : "发送验证邮件"}</Button>
+                        } {...authToken}></Form.Input>
+                        <Button color="blue" onClick={() => auth()}>
+                            提交验证
+                        </Button>
+                    </Form>
+                </Segment>}
             </Grid.Column>
-            <Grid.Column></Grid.Column>
         </Grid>
     </Container>;
 };

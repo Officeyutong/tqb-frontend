@@ -139,7 +139,7 @@ const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> =
                                     <input type="file" ref={uploadElement}></input>
                                 </Grid.Column>
                                 <Grid.Column>
-                                    <Button onClick={() => doUpload()} color="green" size="small" loading={uploading}>上传</Button>
+                                    <Button onClick={() => doUpload()} color="blue" size="small" loading={uploading}>上传</Button>
                                 </Grid.Column>
                             </Grid>
                         </Grid.Column>
