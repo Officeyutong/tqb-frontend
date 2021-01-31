@@ -27,18 +27,16 @@ interface NonSelectionSubquestion {
 };
 type Question<withDetails> = {
     title: string;
-    
     status: QuestionStatus;
-
-
 } & (withDetails extends true ? {
     desc: string;
+    statement: string;
     sub_question: Array<SelectionSubquestion | NonSelectionSubquestion>;
     author: string;
     audio: string;
     time_limit: number;
     next_scene: Array<{ scene: string; option: string; }>;
-} : {next_scene: Array<string>;});
+} : { next_scene: Array<string>; });
 interface Subject {
     abbr: string;
     name: string;
@@ -64,8 +62,8 @@ interface Submission {
     file: Array<string>;
     option: Array<Array<number>>;
     point: number;
-    answer_time:number;//作答耗时
-    is_time_out:boolean;//是否答题超时
+    answer_time: number;//作答耗时
+    is_time_out: boolean;//是否答题超时
 };
 
 export type {

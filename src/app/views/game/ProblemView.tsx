@@ -8,7 +8,7 @@ import {
 
 import { withRouter, RouteComponentProps, useHistory } from "react-router-dom";
 import { wrapDocumentTitle } from "../../common/Utils";
-import { Button, Container, Dimmer, Header, Loader, Segment, Table, Rail, Sticky, Ref, Grid } from "semantic-ui-react";
+import { Button, Container, Dimmer, Header, Loader, Segment, Table, Rail, Sticky, Ref, Grid, Divider } from "semantic-ui-react";
 
 import _ from "lodash";
 import { NonSelectionSubquestionComponent, SelectionSubquestionComponent } from "./ProblemViewUtils";
@@ -253,13 +253,12 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                         </Table.Body>
                                     </Table>
                                 })()}
-
-                            </Segment>
-                            <Segment stacked>
+                                <Divider></Divider>
                                 <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.desc) }}></div>
                                 {shouldUsePlayer() && <audio ref={audioRef} src={data.audio} controls={data.time_limit === 0}>
                                 </audio>}
                             </Segment>
+
                             {shouldUsePlayer() && (!audioLoaded) && <Segment>
                                 <Dimmer active>
                                     <Loader>加载音频文件中...</Loader>
@@ -280,7 +279,9 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                         </>;
                                     case QuestionStatus.ANSWERING:
                                         return <>
-
+                                            {data.statement && <Segment stacked>
+                                                <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.statement) }}></div>
+                                            </Segment>}
                                             {(shouldUsePlayer() ? audioLoaded : true) && data.sub_question.map((item, i) => <div key={i} style={{ marginBottom: "30px" }}>
                                                 <Segment stacked>
                                                     {item.type === SubQuestionType.SELECTION ? <SelectionSubquestionComponent
