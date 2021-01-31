@@ -43,8 +43,6 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
 
         </Segment>}
         {(loaded && data !== null) && <>
-
-
             <Grid columns="3" centered>
                 <Grid.Row>
                     <Grid.Column textAlign="center">

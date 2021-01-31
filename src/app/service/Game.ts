@@ -28,6 +28,12 @@ class GameManager {
     sceneByID: Map<string, SceneListItem> = new Map();
     firstSubmission: Map<string, Submission> = new Map();
     incomeScene: Map<string, SceneListItem> = new Map();
+    public getAllScenes(){
+        return this.scenes;
+    }
+    public getAllQuestions(){
+        return this.questions;
+    }
     public getIncomeScene(id: string): SceneListItem | null {
         const result = this.incomeScene.get(id);
         return result ? result : null;

@@ -60,6 +60,7 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                             { iconName: "help circle", url: "/doc/tqb-2nd", text: "第二届退群杯简介" },
                             { iconName: "address book", url: "/doc/staff", text: "Staff简介" },
                             { iconName: "archive", url: "/doc/scene", text: "剧情简介" },
+                            (props.state.userState.userData.is_all_unlocked && { iconName: "recycle", url: "/godmode/list", text: "所有题目与剧情" })
                         ] as Array<{ iconName: SemanticICONS; url: string; text: string; }>).map(item => item && <Grid.Column key={item.url}>
                             <GNAQButton {...item}></GNAQButton>
                         </Grid.Column>)}

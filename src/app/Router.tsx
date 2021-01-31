@@ -15,6 +15,7 @@ import RanklistView from "./views/ranklist/RankListView";
 
 import GameRoute from "./views/game/GameRoute";
 
+import GodModeRoute from "./views/godmode/GodModeRoute";
 
 import DocView from "./views/DocView";
 import { Dimmer, Loader, Segment } from "semantic-ui-react";
@@ -48,7 +49,7 @@ const DocRoute = withRouter(((props) => {
         <Route path={`${props.match.path}/scene`} render={() => <DocView path={require("../assets/docs/scene.md").default} title="剧情简介"></DocView>}></Route>
     </Switch>
 }) as React.FC<RouteComponentProps>);
-const MyRouter: React.FC<{}> = () => {
+const MyRouter: React.FC<{}> = connect((state: StateType) => ({ state: state }))((({ state }) => {
 
     return <Router>
         <Switch>
@@ -64,12 +65,16 @@ const MyRouter: React.FC<{}> = () => {
                         <DocRoute></DocRoute>
                     </Route>
                     <RequireDataLoadingRoute path="/game" render={() => <GameRoute></GameRoute>}></RequireDataLoadingRoute>
+
+                    {state.userState.userData.is_all_unlocked && <Route path="/godmode">
+                        <GodModeRoute></GodModeRoute>
+                    </Route>}
                     {/*用以匹配404页面*/}
                     <Route exact path="*" component={View404}></Route>
                 </Switch>
             </BaseView>
         </Switch>
     </Router>;
-};
+}) as React.FC<RouteProps & { state: StateType }>);
 
 export default MyRouter;

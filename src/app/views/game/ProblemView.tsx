@@ -101,7 +101,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                 setDummy(x => !x);
             } else {
                 clearInterval(token);
-                if (data!.status === QuestionStatus.ANSWERING) {
+                if (data?.status === QuestionStatus.ANSWERING) {
                     if (timeOuted()) {
                         window.location.reload();
                     }
@@ -228,7 +228,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                 {data.title}
             </Header>
             <Grid columns="2">
-                <Grid.Column>
+                <Grid.Column width="10">
                     <Ref innerRef={stickyRef}>
                         <div>
                             <Segment stacked>
@@ -253,6 +253,9 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                         </Table.Body>
                                     </Table>
                                 })()}
+
+                            </Segment>
+                            <Segment stacked>
                                 <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.desc) }}></div>
                                 {shouldUsePlayer() && <audio ref={audioRef} src={data.audio} controls={data.time_limit === 0}>
                                 </audio>}
@@ -278,7 +281,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                     case QuestionStatus.ANSWERING:
                                         return <>
 
-                                            {(shouldUsePlayer() ? audioLoaded : true) && data.sub_question.map((item, i) => <div key={i}>
+                                            {(shouldUsePlayer() ? audioLoaded : true) && data.sub_question.map((item, i) => <div key={i} style={{ marginBottom: "30px" }}>
                                                 <Segment stacked>
                                                     {item.type === SubQuestionType.SELECTION ? <SelectionSubquestionComponent
                                                         data={item}
@@ -302,7 +305,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                         </>
                                     case QuestionStatus.SUBMITTED:
                                         return <>
-                                            {data.sub_question.map((item, i) => <div key={i}>
+                                            {data.sub_question.map((item, i) => <div key={i} style={{ marginBottom: "30px" }}>
                                                 <Segment stacked>
                                                     {item.type === SubQuestionType.SELECTION ? <SelectionSubquestionComponent
                                                         data={item}

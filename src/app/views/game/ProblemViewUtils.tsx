@@ -24,7 +24,7 @@ type SelectionSubquestionProps = {
 };
 const SelectionSubquestionComponent: React.FC<SelectionSubquestionProps> = ({ data, setError, updateSubmission, userSubmission, error, allowEdit }) => {
 
-    const singleSelection = (data.full_point === 0);
+    const singleSelection = () => (data.part_point === 0);
     const toggleAndUpdate = (pos: number) => {
         setError(false);
         if (userSubmission === null) {
@@ -38,25 +38,25 @@ const SelectionSubquestionComponent: React.FC<SelectionSubquestionProps> = ({ da
         }
     };
     return <div>
-        <span>本题满分 {data.full_point}，部分得分 {data.part_point} 。</span>
+        <span>本题满分 <span style={{ color: "red" }}>{data.full_point} 分</span>，部分得分 <span style={{ color: "red" }}>{data.part_point} 分</span>。</span>
         <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.desc) }}></div>
         <Segment stacked>
 
             <Grid columns="1">
-                <Grid.Column>
-                    {error && <Message error>
+                {error && <Grid.Column>
+                    <Message error>
                         <Message.Header>错误</Message.Header>
                         <p>本题尚未作答</p>
-                    </Message>}
-                </Grid.Column>
+                    </Message>
+                </Grid.Column>}
                 <Grid.Column>
                     <Form>
                         {data.option.map((item, i) => <Form.Field style={{ display: "flex" }} key={i}>
                             <Checkbox
-                                radio={singleSelection}
+                                radio={singleSelection()}
                                 checked={userSubmission?.includes(i)}
                                 onChange={() => {
-                                    if (singleSelection) updateSubmission([i]);
+                                    if (singleSelection()) updateSubmission([i]);
                                     else toggleAndUpdate(i);
                                     setError(false);
                                 }}
@@ -124,7 +124,7 @@ const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> =
             </Message>}
             <Grid columns="2">
                 <Grid.Column>
-                    <span>本题满分 {data.full_point} 分</span>
+                    <span>本题满分 <span style={{ color: "red" }}>{data.full_point} 分</span>。</span>
                     {userSubmission === null ? <div>
                         您尚未作答过本题
                     </div> : <div>

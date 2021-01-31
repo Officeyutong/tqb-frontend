@@ -29,6 +29,7 @@ interface UserInfoType {
     start_time: number;
     unlocked_scene: Array<string>;
     finished_question: Array<string>;
+    is_all_unlocked: boolean;
 };
 interface LocalStoragePackageType {
     userState: UserStateType;
@@ -59,7 +60,7 @@ class User {
         // console.debug("dispatch", this.userInfo);
         store.dispatch(makeUserStateUpdateAction(
             this.alreadyLogin,
-            { ...(this.userInfo || { email: "", username: "", _id: "", finished_question: [], is_email_verified: false, last_question: "", last_scene: "", start_time: -1, unlocked_scene: [] }) }
+            { ...(this.userInfo || { is_all_unlocked: false, email: "", username: "", _id: "", finished_question: [], is_email_verified: false, last_question: "", last_scene: "", start_time: -1, unlocked_scene: [] }) }
         ));
     }
     getAuthHeader(): string {
@@ -75,6 +76,7 @@ class User {
         for (const item of this.userInfo.finished_question) {
             this.finishedQuestion.add(item);
         }
+        this.dispatchToStore();
     }
     async allocatePublicKey(email: string): Promise<string> {
         let tokenResp = (await axios.get("/user/public_key", { params: { email: email } })).data as {

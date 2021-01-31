@@ -11,6 +11,7 @@ import { APIError } from "./Exception";
 import { user } from "./service/User";
 import { game } from "./service/Game";
 import "katex/dist/katex.min.css";
+import "./App.css";
 console.debug(process.env);
 const BACKEND_BASE_URL = process.env.REACT_APP_BASE_URL;
 const DEBUG_MODE = process.env.NODE_ENV === "development";
