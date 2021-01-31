@@ -57,7 +57,7 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                             (props.state.userState.login) && { iconName: "signal", url: "/ranklist", text: "排行榜" },
                             (props.state.userState.login) && { iconName: "tasks", url: "/game/submission", text: "查看提交" },
                             { iconName: "help circle", url: "/doc/tqb", text: "退群杯简介" },
-                            { iconName: "help circle", url: "/doc/tqb-2nd", text: "第二届退群杯简介" },
+                            { iconName: "help circle", url: "/doc/tqb-2nd", text: "第二届简介" },
                             { iconName: "address book", url: "/doc/staff", text: "Staff简介" },
                             { iconName: "archive", url: "/doc/scene", text: "剧情简介" },
                             (props.state.userState.userData.is_all_unlocked && { iconName: "recycle", url: "/godmode/list", text: "所有题目与剧情" })
