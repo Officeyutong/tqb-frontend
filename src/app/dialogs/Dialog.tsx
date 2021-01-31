@@ -8,6 +8,7 @@ type StateType = {
     error: boolean;
     success: boolean;
     showTransition: boolean;
+    withReturnToHome: boolean;
 
 };
 type PropType = {
@@ -15,6 +16,7 @@ type PropType = {
     success: boolean;
     message: string;
     title: string;
+    withReturnToHome: boolean;
 };
 class MyMessageBox extends React.Component<PropType, StateType> {
 
@@ -25,7 +27,8 @@ class MyMessageBox extends React.Component<PropType, StateType> {
         title: "标题",
         error: true,
         success: false,
-        showTransition: false
+        showTransition: false,
+        withReturnToHome: false
     }
     public constructor(props: PropType) {
         super(props);
@@ -64,7 +67,7 @@ class MyMessageBox extends React.Component<PropType, StateType> {
                     </Message>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button as="a" color="blue" href="/">返回主页</Button>
+                    {this.state.withReturnToHome && <Button as="a" color="blue" href="/">返回主页</Button>}
                     <Button color="green" onClick={() => this.setState({ showing: false })}>关闭</Button>
                 </Modal.Actions>
             </Modal>
@@ -72,15 +75,15 @@ class MyMessageBox extends React.Component<PropType, StateType> {
     }
 };
 
-const show = (message?: string, title: string = "提示", error: boolean = false, success: boolean = false) => {
+const show = (message?: string, title: string = "提示", error: boolean = false, success: boolean = false, withReturnToHome: boolean = false) => {
     let target = document.createElement("div");
-    ReactDOM.render(<MyMessageBox message={String(message)} title={title} error={error} success={success} />, target);
+    ReactDOM.render(<MyMessageBox message={String(message)} title={title} error={error} success={success} withReturnToHome={withReturnToHome} />, target);
 };
-const showErrorModal = (message?: string, title: string = "错误") => {
-    show(message, title, true, false);
+const showErrorModal = (message?: string, title: string = "错误", withReturnToHome: boolean = false) => {
+    show(message, title, true, false, withReturnToHome);
 };
-const showSuccessModal = (message?: string, title: string = "操作完成") => {
-    show(message, title, false, true);
+const showSuccessModal = (message?: string, title: string = "操作完成", withReturnToHome: boolean = false) => {
+    show(message, title, false, true, withReturnToHome);
 };
 const ConfirmModal: React.FC<{ content?: string; title?: string; onConfirm: () => void; onCancel?: () => void; }> = (props) => {
     const [open, setOpen] = useState(true);
