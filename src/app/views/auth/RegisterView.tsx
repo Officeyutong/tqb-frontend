@@ -51,7 +51,7 @@ const RegisterView: React.FC<{}> = () => {
             setLoading(true);
             await user.register(email.value, username.value, password.value);
             await sendEmail();
-            showSuccessModal("一封包含验证码的邮件已经发送到您邮箱的垃圾箱，请注意查收.");
+            showSuccessModal("一封包含验证码的邮件已经发送到您邮箱(的垃圾箱)，请注意查收.");
         } catch (e) {
             console.error(e);
         } finally {
@@ -78,11 +78,12 @@ const RegisterView: React.FC<{}> = () => {
                         <Form.Input disabled={emailSended} label="电子邮箱" {...email}></Form.Input>
                         <Form.Input disabled={emailSended} label="用户名" {...username}></Form.Input>
                         <Form.Input disabled={emailSended} type="password" label="密码" {...password}></Form.Input>
-                        {<Form.Input label="验证Token" {...authToken}></Form.Input>}
-                        <Button loading={loading} disabled={countdown > 0} color="green" onClick={() => submit()}>{emailSended ? (countdown > 0 ? `${countdown}s` : "重发验证邮件") : "发送验证邮件"}</Button>
+                        {<Form.Input label="验证码" action={
+                            <Button loading={loading} disabled={countdown > 0} color="green" onClick={() => submit()}>{emailSended ? (countdown > 0 ? `${countdown}s` : "重发验证邮件") : "发送验证邮件"}</Button>
+                        } {...authToken}></Form.Input>}
                         {emailSended && <Button color="blue" onClick={() => auth()}>
                             提交验证
-                    </Button>}
+                            </Button>}
                     </Form>
                 </Segment>
             </Grid.Column>
