@@ -17,6 +17,7 @@ import "./gnaq-button.css";
 
 import { axiosObj as axios, DEBUG_MODE } from "../App";
 import { Link } from "react-router-dom";
+import GraphView from "./GraphView";
 const GNAQButton: React.FC<{ iconName: SemanticICONS; url: string; text: string }> = ({ iconName, text, url }) => {
     return <Link to={url} style={{ color: "#1b1c1d" }}>
         <div className="gnaq-main-button" style={{ cursor: "pointer" }}>
@@ -70,6 +71,7 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                     {DEBUG_MODE && <Button onClick={() => debugReset()}>
                         重置数据
                     </Button>}
+                    <GraphView></GraphView>
                 </Grid.Column>
             </Grid>
         </Segment>

@@ -51,7 +51,6 @@ axiosObj.interceptors.response.use(resp => {
     show(JSON.stringify(err), "发生错误", true);
   throw err;
 });
-user.loadState();
 (async () => {
   await user.loadState();
   if (user.getLoginState()) {
