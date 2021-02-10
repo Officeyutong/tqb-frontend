@@ -56,7 +56,7 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                             (props.state.userState.login) && { iconName: "play", url: "/game/subject", text: "开始" },
                             (props.state.userState.login) && { iconName: "signal", url: "/ranklist", text: "排行榜" },
                             (props.state.userState.login) && { iconName: "tasks", url: "/game/submission", text: "查看提交" },
-                            { iconName: "help circle", url: "/doc/tqb", text: "退群杯简介" },
+                            { iconName: "help circle", url: "/doc/tqb", text: "第一届简介" },
                             { iconName: "help circle", url: "/doc/tqb-2nd", text: "第二届简介" },
                             { iconName: "address book", url: "/doc/staff", text: "Staff简介" },
                             { iconName: "archive", url: "/doc/scene", text: "剧情简介" },
@@ -64,8 +64,6 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                         ] as Array<{ iconName: SemanticICONS; url: string; text: string; }>).map(item => item && <Grid.Column key={item.url}>
                             <GNAQButton {...item}></GNAQButton>
                         </Grid.Column>)}
-
-
                     </Grid>
                 </Grid.Column>
                 <Grid.Column>

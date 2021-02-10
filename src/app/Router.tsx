@@ -43,7 +43,7 @@ const RequireDataLoadingRoute = connect(
 const DocRoute = withRouter(((props) => {
 
     return <Switch>
-        <Route path={`${props.match.path}/tqb`} render={() => <DocView path={require("../assets/docs/tqb.md").default} title="退群杯简介"></DocView>}></Route>
+        <Route path={`${props.match.path}/tqb`} render={() => <DocView path={require("../assets/docs/tqb.md").default} title="第一届退群杯简介"></DocView>}></Route>
         <Route path={`${props.match.path}/tqb-2nd`} render={() => <DocView path={require("../assets/docs/tqb-2nd.md").default} title="第二届退群杯简介"></DocView>}></Route>
         <Route path={`${props.match.path}/staff`} render={() => <DocView path={require("../assets/docs/staff.md").default} title="Staff简介"></DocView>}></Route>
         <Route path={`${props.match.path}/scene`} render={() => <DocView path={require("../assets/docs/scene.md").default} title="剧情简介"></DocView>}></Route>
