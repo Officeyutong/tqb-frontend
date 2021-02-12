@@ -20,7 +20,6 @@ type MemberCardPropsType = {
     data: StaffMember;
 };
 const MemberCard: React.FC<MemberCardPropsType> = ({ data }) => {
-
     return <>
         <Segment>
             <Item.Group>
@@ -90,10 +89,8 @@ const StaffDocView: React.FC = () => {
                             </Grid>
                             {i !== arr.length - 1 && <Divider></Divider>}
                         </div>)}
-
                     </>)}
                 </Segment>
-
             </Grid.Column>
         </Grid>
     </Container>;
