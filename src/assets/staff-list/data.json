@@ -11,7 +11,7 @@
         ]
     },
     {
-        "groupName": "数学命题组1",
+        "groupName": "数学命题组",
         "members": [
             {
                 "id": "Alkali",
@@ -30,12 +30,7 @@
                 "school": "北雷村男子职业技术学校/XDU",
                 "description": "左边两个是神仙",
                 "profileImage": "中堂对数.png"
-            }
-        ]
-    },
-    {
-        "groupName": "数学命题组2",
-        "members": [
+            },
             {
                 "id": "lzt404",
                 "school": "浔州高中",
@@ -57,7 +52,7 @@
         ]
     },
     {
-        "groupName": "英语出题组",
+        "groupName": "英语命题组",
         "members": [
             {
                 "id": "ksyx",
