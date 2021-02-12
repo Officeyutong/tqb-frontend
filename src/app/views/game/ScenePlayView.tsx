@@ -34,8 +34,8 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
 
         {loading && <Segment stacked>
             <>
-                <Dimmer>
-                    <Loader></Loader>
+                <Dimmer active>
+                    <Loader>加载中...</Loader>
                 </Dimmer>
                 <div style={{ minHeight: "300px" }}>
                 </div>

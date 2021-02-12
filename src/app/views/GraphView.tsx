@@ -36,8 +36,11 @@ const styles: cytoscape.Stylesheet[] = [
 const GraphView: React.FC<PropsType> = (props) => {
     if (!props.loaded) {
         return <div>
-            <Segment>
-                <Dimmer>
+            <Segment style={{
+                width: "600px",
+                height: "600px",
+            }}>
+                <Dimmer active>
                     <Loader>
                         加载中...
                     </Loader>

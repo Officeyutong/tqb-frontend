@@ -29,12 +29,13 @@ const RequireDataLoadingRoute = connect(
         (props) => {
             const { loaded } = props;
             if (!loaded) {
-                return <Segment stacked>
-                    <Dimmer active >
-                        <Loader>加载数据中...</Loader>
-                    </Dimmer>
-                    <div style={{ height: "300px" }}></div>
-                </Segment>
+                return <Route render={() => <>
+                    <Segment stacked>
+                        <Dimmer active>
+                            <Loader>加载数据中...</Loader>
+                        </Dimmer>
+                        <div style={{ height: "300px" }}></div>
+                    </Segment></>}></Route>
             } else {
                 return <Route {...props}></Route>
             }
@@ -56,10 +57,10 @@ const MyRouter: React.FC<{}> = connect((state: StateType) => ({ state: state }))
         <Switch>
             <BaseView>
                 <Switch>
+                    <Route exact path="/" component={MainView}></Route>
                     <Route exact path="/login" component={LoginView}></Route>
                     <Route exact path="/register" component={RegisterView}></Route>
                     <Route exact path="/reset_password" component={ResetPasswordView}></Route>
-                    <Route exact path="/" component={MainView}></Route>
                     <Route exact path="/ranklist" component={RanklistView}></Route>
 
                     <Route path="/doc">
