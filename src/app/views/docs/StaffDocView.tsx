@@ -29,7 +29,7 @@ const MemberCard: React.FC<MemberCardPropsType> = ({ data }) => {
                         <Item.Header as="h3">
                             {data.id}
                         </Item.Header>
-                        <Item.Meta>Description</Item.Meta>
+                        <Item.Meta>{data.school}</Item.Meta>
                         <Item.Description>
                             <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.description) }}></div>
                         </Item.Description>
