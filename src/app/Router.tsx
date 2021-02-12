@@ -17,8 +17,9 @@ import GameRoute from "./views/game/GameRoute";
 
 import GodModeRoute from "./views/godmode/GodModeRoute";
 
-import DocView from "./views/DocView";
+import GeneralDocView from "./views/docs/GeneralDocView";
 import { Dimmer, Loader, Segment } from "semantic-ui-react";
+import StaffDocView from "./views/docs/StaffDocView";
 
 type RequireDataLoadingRouteProps = { loaded: boolean };
 const RequireDataLoadingRoute = connect(
@@ -43,10 +44,10 @@ const RequireDataLoadingRoute = connect(
 const DocRoute = withRouter(((props) => {
 
     return <Switch>
-        <Route path={`${props.match.path}/tqb`} render={() => <DocView path={require("../assets/docs/tqb.md").default} title="第一届退群杯简介"></DocView>}></Route>
-        <Route path={`${props.match.path}/tqb-2nd`} render={() => <DocView path={require("../assets/docs/tqb-2nd.md").default} title="第二届退群杯简介"></DocView>}></Route>
-        <Route path={`${props.match.path}/staff`} render={() => <DocView path={require("../assets/docs/staff.md").default} title="Staff简介"></DocView>}></Route>
-        <Route path={`${props.match.path}/scene`} render={() => <DocView path={require("../assets/docs/scene.md").default} title="剧情简介"></DocView>}></Route>
+        <Route path={`${props.match.path}/tqb`} render={() => <GeneralDocView path={require("../assets/docs/tqb.md").default} title="第一届退群杯简介"></GeneralDocView>}></Route>
+        <Route path={`${props.match.path}/tqb-2nd`} render={() => <GeneralDocView path={require("../assets/docs/tqb-2nd.md").default} title="第二届退群杯简介"></GeneralDocView>}></Route>
+        <Route path={`${props.match.path}/staff`} render={() => <StaffDocView></StaffDocView>}></Route>
+        <Route path={`${props.match.path}/scene`} render={() => <GeneralDocView path={require("../assets/docs/scene.md").default} title="剧情简介"></GeneralDocView>}></Route>
     </Switch>
 }) as React.FC<RouteComponentProps>);
 const MyRouter: React.FC<{}> = connect((state: StateType) => ({ state: state }))((({ state }) => {

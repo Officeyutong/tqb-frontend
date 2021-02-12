@@ -1,0 +1,217 @@
+[
+    {
+        "groupName": "主pusher & 策划",
+        "members": [
+            {
+                "id": "teafrogsf",
+                "school": "上海科技大学/ShanghaiTech-CS",
+                "description": "破写曲写文催稿摸鱼的",
+                "profileImage": "teafrogsf.png"
+            }
+        ]
+    },
+    {
+        "groupName": "数学命题组1",
+        "members": [
+            {
+                "id": "Alkali",
+                "school": "积水潭女子师范专科学校/BNU",
+                "description": "右边两个是神仙",
+                "profileImage": "Alkali.png"
+            },
+            {
+                "id": "fbhou",
+                "school": "上海交通大学/SJTU",
+                "description": "我两边都是神仙",
+                "profileImage": "fbhou.png"
+            },
+            {
+                "id": "中堂对数",
+                "school": "北雷村男子职业技术学校/XDU",
+                "description": "左边两个是神仙",
+                "profileImage": "中堂对数.png"
+            }
+        ]
+    },
+    {
+        "groupName": "数学命题组2",
+        "members": [
+            {
+                "id": "lzt404",
+                "school": "浔州高中",
+                "description": "爱好导数，相信光，热忱之心不可泯灭",
+                "profileImage": "lzt404.png"
+            },
+            {
+                "id": "SynTime",
+                "school": "",
+                "description": "我只会爬爬爬爬爬爬和摸鱼",
+                "profileImage": "SynTime.png"
+            },
+            {
+                "id": "Photaesthesia",
+                "school": "",
+                "description": "“数学好玩。”——陈省身",
+                "profileImage": "Photaesthesia.png"
+            }
+        ]
+    },
+    {
+        "groupName": "英语出题组",
+        "members": [
+            {
+                "id": "ksyx",
+                "school": "伍斯特理工学院/WPI",
+                "description": "欢迎报考 fall 2022",
+                "profileImage": "ksyx.png"
+            },
+            {
+                "id": "icy",
+                "school": "山东大学/SDU-tsxt",
+                "description": "快来泰山学堂一起卷翻天~",
+                "profileImage": "icy.png"
+            },
+            {
+                "id": "Kamigen",
+                "school": "山东大学/SDU-SE",
+                "description": "kaka祝大家金榜题名！",
+                "profileImage": "Kamigen.png"
+            },
+            {
+                "id": "teafrogsf",
+                "school": "上海科技大学/ShanghaiTech-CS",
+                "description": "欢迎大家关注mothy的Evillious系列",
+                "profileImage": "teafrogsf.png"
+            },
+            {
+                "id": "Photaesthesia",
+                "school": "",
+                "description": "大哥大嫂过年好",
+                "profileImage": "Photaesthesia.png"
+            },
+            {
+                "id": "antileaf",
+                "school": "浙江大学/ZJU",
+                "description": "诚招妹子，性别不限，水瓶为佳，详询1107305016",
+                "profileImage": "antileaf.png"
+            }
+        ]
+    },
+    {
+        "groupName": "英语听力制作组",
+        "members": [
+            {
+                "id": "teafrogsf",
+                "school": "上海科技大学/ShanghaiTech-CS",
+                "description": "我当时为什么要手滑接了后期这活  混音 & 音乐制作 & 饰 Prof. Menstein",
+                "profileImage": "teafrogsf.png"
+            },
+            {
+                "id": "Dawn",
+                "school": "",
+                "description": "白日梦重度患者  饰 Tascho Ling",
+                "profileImage": "Dawn.png"
+            },
+            {
+                "id": "Kobayashi",
+                "school": "上海科技大学/ShanghaiTech-CS",
+                "description": "写三行的话\n大概也算一句话\n最上川(もがみがわ)  饰 Aoki Yao",
+                "profileImage": "Kobayashi.png"
+            },
+            {
+                "id": "DGL",
+                "school": "圣彼得堡国立大学/SPBU",
+                "description": "乌拉！  饰 Diana Sleyps",
+                "profileImage": "DGL.png"
+            },
+            {
+                "id": "Yuzi",
+                "school": "家里蹲大学附属高中",
+                "description": "有富婆可以包养我  饰 Alice Schulz & English “narrator”",
+                "profileImage": "Yuzi.png"
+            },
+            {
+                "id": "超高校级の弾丸厨残焔",
+                "school": "HKUST",
+                "description": "最近不晓得厨少歌还是弹丸更多了，ID先这么用着吧  饰 Flamo Disŝirita",
+                "profileImage": "超高校级の弾丸厨残焔.png"
+            },
+            {
+                "id": "Gesus",
+                "school": "Shanghaitech-CS",
+                "description": "嘤   饰 student",
+                "profileImage": "YGesus.png"
+            },
+            {
+                "id": "llh721113",
+                "school": "中国科学院大学/UCAS",
+                "description": "我是企图靠EQ拯救世界(然后失败了)的屑  饰 staff",
+                "profileImage": "llh721113.png"
+            },
+            {
+                "id": "ATA_RADIO_STN",
+                "school": "上海科技大学/ShanghaiTech-CS",
+                "description": "Dis is an apple，i like apples，apples are good for our health.  饰 another staff",
+                "profileImage": "ATA_RADIO_STN.png"
+            },
+            {
+                "id": "七点半起不来跳楼",
+                "school": "ShanghaiTech-CS",
+                "description": "广告位招租  饰 assistant",
+                "profileImage": "七点半起不来跳楼.png"
+            },
+            {
+                "id": "外接圆爷爷",
+                "school": "武汉大学/WHU-CS",
+                "description": "我棒读的听力为什么不够棒  饰 Chinese narrator",
+                "profileImage": "wjyyy.png"
+            }
+        ]
+    },
+    {
+        "groupName": "物理出题组",
+        "members": [
+            {
+                "id": "Hurricane",
+                "school": "电子科技大学/UESTC",
+                "description": "一位不愿意透露姓名的鸽王之王",
+                "profileImage": "Hurricane.png"
+            },
+            {
+                "id": "te5555",
+                "school": "山东省实验中学",
+                "description": "退役的菜鸡OIer，希望心态不崩",
+                "profileImage": "te5555.png"
+            },
+            {
+                "id": "Ufowoqqqo",
+                "school": "佛山市南海区石门中学",
+                "description": " Working Men of All Countries, Unite!",
+                "profileImage": "Ufowoqqqo.png"
+            },
+            {
+                "id": "fbhou",
+                "school": "上海交通大学/SJTU",
+                "description": "最能鸽的一个",
+                "profileImage": "fbhou.png"
+            }
+        ]
+    },
+    {
+        "groupName": "开发组",
+        "members": [
+            {
+                "id": "MnFe",
+                "school": "武汉地质学院/CUGWH",
+                "description": "摸鱼&写前端的",
+                "profileImage": "MnFe.png"
+            },
+            {
+                "id": "KSkun",
+                "school": "华中内卷大学/HUST",
+                "description": "CRUD boy",
+                "profileImage": "KSkun.png"
+            }
+        ]
+    }
+]

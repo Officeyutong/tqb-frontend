@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { converter } from "../common/Markdown";
-import { useDocumentTitle } from "../common/Utils";
+import { converter } from "../../common/Markdown";
+import { useDocumentTitle } from "../../common/Utils";
 import axios from "axios";
 import {
     Container,
