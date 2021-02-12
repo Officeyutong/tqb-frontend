@@ -104,61 +104,61 @@
             {
                 "id": "Dawn",
                 "school": "",
-                "description": "白日梦重度患者  饰 Tascho Ling",
+                "description": "白日梦重度患者\n\n饰 Tascho Ling",
                 "profileImage": "Dawn.png"
             },
             {
                 "id": "Kobayashi",
                 "school": "上海科技大学/ShanghaiTech-CS",
-                "description": "写三行的话\\n大概也算一句话\\n最上川(もがみがわ)  饰 Aoki Yao",
+                "description": "写三行的话\\n大概也算一句话\\n最上川(もがみがわ)\n\n饰 Aoki Yao",
                 "profileImage": "Kobayashi.png"
             },
             {
                 "id": "DGL",
                 "school": "圣彼得堡国立大学/SPBU",
-                "description": "乌拉！  饰 Diana Sleyps",
+                "description": "乌拉！\n\n饰 Diana Sleyps",
                 "profileImage": "DGL.png"
             },
             {
                 "id": "Yuzi",
                 "school": "家里蹲大学附属高中",
-                "description": "有富婆可以包养我  饰 Alice Schulz & English “narrator”",
+                "description": "有富婆可以包养我\n\n饰 Alice Schulz & English “narrator”",
                 "profileImage": "Yuzi.png"
             },
             {
                 "id": "超高校级の弾丸厨残焔",
                 "school": "HKUST",
-                "description": "最近不晓得厨少歌还是弹丸更多了，ID先这么用着吧  饰 Flamo Disŝirita",
+                "description": "最近不晓得厨少歌还是弹丸更多了，ID先这么用着吧\n\n饰 Flamo Disŝirita",
                 "profileImage": "超高校级の弾丸厨残焔.png"
             },
             {
                 "id": "Gesus",
                 "school": "Shanghaitech-CS",
-                "description": "嘤   饰 student",
+                "description": "嘤\n\n饰 student",
                 "profileImage": "Gesus.png"
             },
             {
                 "id": "llh721113",
                 "school": "中国科学院大学/UCAS",
-                "description": "我是企图靠EQ拯救世界(然后失败了)的屑  饰 staff",
+                "description": "我是企图靠EQ拯救世界(然后失败了)的屑\n\n饰 staff",
                 "profileImage": "llh721113.png"
             },
             {
                 "id": "ATA_RADIO_STN",
                 "school": "上海科技大学/ShanghaiTech-CS",
-                "description": "Dis is an apple，i like apples，apples are good for our health.  饰 another staff",
+                "description": "Dis is an apple，i like apples，apples are good for our health.\n\n饰 another staff",
                 "profileImage": "ATA_RADIO_STN.png"
             },
             {
                 "id": "七点半起不来跳楼",
                 "school": "ShanghaiTech-CS",
-                "description": "广告位招租  饰 assistant",
+                "description": "广告位招租\n\n饰 assistant",
                 "profileImage": "七点半起不来跳楼.png"
             },
             {
                 "id": "wjyyy",
                 "school": "武汉大学/WHU-CS",
-                "description": "我棒读的听力为什么不够棒  饰 Chinese narrator",
+                "description": "我棒读的听力为什么不够棒\n\n饰 Chinese narrator",
                 "profileImage": "wjyyy.png"
             }
         ]
