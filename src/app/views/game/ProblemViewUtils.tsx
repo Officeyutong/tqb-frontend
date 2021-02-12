@@ -136,7 +136,7 @@ const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> =
                         <Grid.Column>
                             <Grid columns="2">
                                 <Grid.Column>
-                                    <input type="file" ref={uploadElement}></input>
+                                    <input type="file" ref={uploadElement} accept="application/pdf"></input>
                                 </Grid.Column>
                                 <Grid.Column>
                                     <Button onClick={() => doUpload()} color="blue" size="small" loading={uploading}>上传</Button>
@@ -144,7 +144,7 @@ const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> =
                             </Grid>
                         </Grid.Column>
                         <Grid.Column>
-                            {uploading && <Progress progress percent={percent} indicating></Progress>}
+                            {uploading && <Progress progress percent={Math.ceil(percent*100)/100} indicating></Progress>}
                         </Grid.Column>
                     </Grid>}
                 </Grid.Column>

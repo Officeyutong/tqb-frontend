@@ -3,7 +3,6 @@ import { converter } from "../../common/Markdown";
 import { useDocumentTitle } from "../../common/Utils";
 import axios from "axios";
 import {
-    Container,
     Dimmer,
     Header,
     Loader,
@@ -30,7 +29,7 @@ const DocView: React.FC<DocViewPropsType> = ({ path, title }) => {
 
         }
     }, [loaded, path]);
-    return <Container>
+    return <div>
         <Header as="h1">
             {title}
         </Header>
@@ -43,7 +42,7 @@ const DocView: React.FC<DocViewPropsType> = ({ path, title }) => {
             </>}
             <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(doc) }}></div>
         </Segment>
-    </Container>
+    </div>
 };
 
 export default DocView;

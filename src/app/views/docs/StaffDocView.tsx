@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Divider, Grid, Header, Item, Placeholder, Segment } from "semantic-ui-react";
+import { Divider, Grid, Header, Item, Placeholder, Segment } from "semantic-ui-react";
 import { useDocumentTitle } from "../../common/Utils";
 import _ from "lodash";
 import { converter } from "../../common/Markdown";
@@ -55,47 +55,43 @@ const StaffDocView: React.FC = () => {
             setLoaded(true);
         }
     }, [loaded]);
-    return <Container>
-        <Grid columns="3" centered>
-            <Grid.Column width="16">
-                <Header as="h1">
-                    Staff列表
+    return <div>
+        <Header as="h1">
+            Staff列表
                 </Header>
-                <Segment stacked>
-                    {loading ? <>
-                        <Grid columns="3">
-                            {_.times(3, i => <Grid.Column key={i}>
-                                <Segment raised>
-                                    <Placeholder>
-                                        <Placeholder.Header image>
-                                            <Placeholder.Line />
-                                            <Placeholder.Line />
-                                        </Placeholder.Header>
-                                        <Placeholder.Paragraph>
-                                            <Placeholder.Line length='medium' />
-                                            <Placeholder.Line length='short' />
-                                        </Placeholder.Paragraph>
-                                    </Placeholder>
-                                </Segment>
-                            </Grid.Column>)}
-                        </Grid>
-                    </> : (data && <>
-                        {data.map((item, i, arr) => <div key={i}>
-                            <Header as="h2">
-                                {item.groupName}
-                            </Header>
-                            <Grid columns="3">
-                                {item.members.map((member, j) => <Grid.Column key={j}>
-                                    <MemberCard data={member}></MemberCard>
-                                </Grid.Column>)}
-                            </Grid>
-                            {i !== arr.length - 1 && <Divider></Divider>}
-                        </div>)}
-                    </>)}
-                </Segment>
-            </Grid.Column>
-        </Grid>
-    </Container>;
+        <Segment stacked>
+            {loading ? <>
+                <Grid columns="3">
+                    {_.times(3, i => <Grid.Column key={i}>
+                        <Segment raised>
+                            <Placeholder>
+                                <Placeholder.Header image>
+                                    <Placeholder.Line />
+                                    <Placeholder.Line />
+                                </Placeholder.Header>
+                                <Placeholder.Paragraph>
+                                    <Placeholder.Line length='medium' />
+                                    <Placeholder.Line length='short' />
+                                </Placeholder.Paragraph>
+                            </Placeholder>
+                        </Segment>
+                    </Grid.Column>)}
+                </Grid>
+            </> : (data && <>
+                {data.map((item, i, arr) => <div key={i}>
+                    <Header as="h2">
+                        {item.groupName}
+                    </Header>
+                    <Grid columns="3">
+                        {item.members.map((member, j) => <Grid.Column key={j}>
+                            <MemberCard data={member}></MemberCard>
+                        </Grid.Column>)}
+                    </Grid>
+                    {i !== arr.length - 1 && <Divider></Divider>}
+                </div>)}
+            </>)}
+        </Segment>
+    </div>;
 };
 
 

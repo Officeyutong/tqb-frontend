@@ -7,7 +7,6 @@ import {
     Grid,
     Icon,
     SemanticICONS,
-    Header
 } from "semantic-ui-react";
 import {
     useDocumentTitle,
@@ -42,17 +41,10 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
         window.location.reload();
     };
     return <div>
-        <Grid centered columns="3">
-            <Grid.Column textAlign="center">
-                <Header as="h1">
-                    退群杯
-                </Header>
-            </Grid.Column>
-        </Grid>
         <Segment stacked>
-            <Grid columns="2">
-                <Grid.Column>
-                    <Grid columns="3">
+            <Grid columns="2" >
+                <Grid.Column width="6">
+                    <Grid columns="4">
                         {([
                             (props.state.userState.login) && { iconName: "play", url: "/game/subject", text: "开始" },
                             (props.state.userState.login) && { iconName: "signal", url: "/ranklist", text: "排行榜" },
@@ -67,7 +59,7 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                         </Grid.Column>)}
                     </Grid>
                 </Grid.Column>
-                <Grid.Column>
+                <Grid.Column width="10">
                     {DEBUG_MODE && <Button onClick={() => debugReset()}>
                         重置数据
                     </Button>}
