@@ -71,7 +71,13 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                     {DEBUG_MODE && <Button onClick={() => debugReset()}>
                         重置数据
                     </Button>}
-                    <GraphView></GraphView>
+                    {props.state.userState.login ? <>
+                        <GraphView></GraphView>
+                    </> : <>
+                        <span>
+                            登录之后这里才能显示点东西...
+                        </span>
+                    </>}
                 </Grid.Column>
             </Grid>
         </Segment>
