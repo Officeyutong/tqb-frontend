@@ -115,7 +115,7 @@
             {
                 "id": "Kobayashi",
                 "school": "上海科技大学/ShanghaiTech-CS",
-                "description": "写三行的话\n大概也算一句话\n最上川(もがみがわ)  饰 Aoki Yao",
+                "description": "写三行的话\\n大概也算一句话\\n最上川(もがみがわ)  饰 Aoki Yao",
                 "profileImage": "Kobayashi.png"
             },
             {
@@ -140,7 +140,7 @@
                 "id": "Gesus",
                 "school": "Shanghaitech-CS",
                 "description": "嘤   饰 student",
-                "profileImage": "YGesus.png"
+                "profileImage": "Gesus.png"
             },
             {
                 "id": "llh721113",
