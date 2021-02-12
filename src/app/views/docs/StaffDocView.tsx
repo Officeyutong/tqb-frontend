@@ -24,7 +24,9 @@ const MemberCard: React.FC<MemberCardPropsType> = ({ data }) => {
         <Segment>
             <Item.Group>
                 <Item>
-                    <Item.Image circular size="tiny" src={require(`../../../assets/staff-list/profile-images/${data.profileImage}`).default}></Item.Image>
+                    <Item.Image circular size="tiny" src={require(`../../../assets/staff-list/profile-images/${data.profileImage}`).default} style={{
+                        height: "80px"
+                    }}></Item.Image>
                     <Item.Content>
                         <Item.Header as="h3">
                             {data.id}
