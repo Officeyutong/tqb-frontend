@@ -7,6 +7,9 @@ import {
     Grid,
     Icon,
     SemanticICONS,
+    Header,
+    Image,
+    Divider,
 } from "semantic-ui-react";
 import {
     useDocumentTitle,
@@ -17,6 +20,9 @@ import "./gnaq-button.css";
 import { axiosObj as axios, DEBUG_MODE } from "../App";
 import { Link } from "react-router-dom";
 import GraphView from "./GraphView";
+import AlipayDonationImage from "../../assets/donation/alipay.png";
+import WechatDonationImage from "../../assets/donation/wechat.png";
+
 const GNAQButton: React.FC<{ iconName: SemanticICONS; url: string; text: string }> = ({ iconName, text, url }) => {
     return <Link to={url} style={{ color: "#1b1c1d" }}>
         <div className="gnaq-main-button" style={{ cursor: "pointer" }}>
@@ -41,9 +47,12 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
         window.location.reload();
     };
     return <div>
-        <Segment stacked>
-            <Grid columns="2" >
-                <Grid.Column width="6">
+        <Grid columns="2" >
+            <Grid.Column >
+                <Segment stacked>
+                    <Header as="h1">
+                        菜单
+                    </Header>
                     <Grid columns="4">
                         {([
                             (props.state.userState.login) && { iconName: "play", url: "/game/subject", text: "开始" },
@@ -58,8 +67,10 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                             <GNAQButton {...item}></GNAQButton>
                         </Grid.Column>)}
                     </Grid>
-                </Grid.Column>
-                <Grid.Column width="10">
+                </Segment>
+            </Grid.Column>
+            {props.state.userState.login && <Grid.Column >
+                <Segment stacked>
                     {DEBUG_MODE && <Button onClick={() => debugReset()}>
                         重置数据
                     </Button>}
@@ -70,9 +81,28 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                             登录之后这里才能显示点东西...
                         </span>
                     </>}
-                </Grid.Column>
-            </Grid>
-        </Segment>
+                </Segment>
+            </Grid.Column>}
+
+            <Grid.Column >
+                <Segment stacked>
+                    <Header as="h1">
+                        捐助
+                    </Header>
+                    <Divider></Divider>
+                    <div>
+                        <Grid columns="2">
+                            <Grid.Column>
+                                <Image src={AlipayDonationImage}></Image>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Image src={WechatDonationImage}></Image>
+                            </Grid.Column>
+                        </Grid>
+                    </div>
+                </Segment>
+            </Grid.Column>
+        </Grid>
     </div>;
 };
 

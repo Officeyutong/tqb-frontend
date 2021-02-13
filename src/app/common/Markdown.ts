@@ -26,7 +26,10 @@ const converter = new showdown.Converter({
                 return result;
             }
         }
-    ], tables: true, literalMidWordUnderscores: true
+    ],
+    tables: true,
+    literalMidWordUnderscores: true,
+    strikethrough: true
 });
 
 export { converter };

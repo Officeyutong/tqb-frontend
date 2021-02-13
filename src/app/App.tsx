@@ -45,10 +45,20 @@ axiosObj.interceptors.response.use(resp => {
 }, err => {
   let resp = err.response;
   console.log(resp);
-  if (resp)
-    show(JSON.stringify(resp.data), resp.status + " " + resp.statusText, true);
+  if (resp) {
+    const data = resp.data as {
+      data?: any;
+      message: string;
+      success: boolean;
+      error?: any;
+    };
+    if (DEBUG_MODE) {
+      show(JSON.stringify(data), resp.status + " " + resp.statusText, true);
+    }
+    else { show(data.message, resp.status + " " + resp.statusText, true); }
+  }
   else
-    show(JSON.stringify(err), "发生错误", true);
+    show(err, "发生错误", true);
   throw err;
 });
 (async () => {

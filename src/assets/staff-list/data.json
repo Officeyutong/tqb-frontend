@@ -11,6 +11,23 @@
         ]
     },
     {
+        "groupName": "开发组",
+        "members": [
+            {
+                "id": "MnFe",
+                "school": "武汉地质学院/CUG",
+                "description": "摸鱼&写前端的",
+                "profileImage": "MnFe.png"
+            },
+            {
+                "id": "KSkun",
+                "school": "华中内卷大学/HUST",
+                "description": "CRUD boy",
+                "profileImage": "KSkun.png"
+            }
+        ]
+    },
+    {
         "groupName": "数学命题组",
         "members": [
             {
@@ -133,7 +150,7 @@
             },
             {
                 "id": "Gesus",
-                "school": "Shanghaitech-CS",
+                "school": "上海科技大学/Shanghaitech-CS",
                 "description": "嘤\n\n饰 student",
                 "profileImage": "Gesus.png"
             },
@@ -151,7 +168,7 @@
             },
             {
                 "id": "七点半起不来跳楼",
-                "school": "ShanghaiTech-CS",
+                "school": "上海科技大学/ShanghaiTech-CS",
                 "description": "广告位招租\n\n饰 assistant",
                 "profileImage": "七点半起不来跳楼.png"
             },
@@ -189,23 +206,6 @@
                 "school": "上海交通大学/SJTU",
                 "description": "最能鸽的一个",
                 "profileImage": "fbhou.png"
-            }
-        ]
-    },
-    {
-        "groupName": "开发组",
-        "members": [
-            {
-                "id": "MnFe",
-                "school": "武汉地质学院/CUGWH",
-                "description": "摸鱼&写前端的",
-                "profileImage": "MnFe.png"
-            },
-            {
-                "id": "KSkun",
-                "school": "华中内卷大学/HUST",
-                "description": "CRUD boy",
-                "profileImage": "KSkun.png"
             }
         ]
     }

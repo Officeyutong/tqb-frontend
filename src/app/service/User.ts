@@ -139,6 +139,7 @@ class User {
             let user = JSON.parse(data) as LocalStoragePackageType;
             this.userState = user.userState;
             this.validate();
+            if (!this.alreadyLogin) return;
             await this.loadUserInfo();
             this.dispatchToStore();
         }

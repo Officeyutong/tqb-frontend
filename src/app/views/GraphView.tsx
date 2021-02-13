@@ -67,8 +67,9 @@ const GraphView: React.FC<PropsType> = (props) => {
         overflowX: "scroll",
         overflowY: "scroll"
     }}>
-
         <CytoscapeComponent
+            maxZoom={3}
+            minZoom={0.5}
             elements={elements}
             stylesheet={styles}
             layout={{
