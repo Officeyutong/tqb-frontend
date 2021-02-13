@@ -49,25 +49,45 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
     return <div>
         <Grid columns="2" >
             <Grid.Column >
-                <Segment stacked>
-                    <Header as="h1">
-                        菜单
-                    </Header>
-                    <Grid columns="4">
-                        {([
-                            (props.state.userState.login) && { iconName: "play", url: "/game/subject", text: "开始" },
-                            (props.state.userState.login) && { iconName: "signal", url: "/ranklist", text: "排行榜" },
-                            (props.state.userState.login) && { iconName: "tasks", url: "/game/submission", text: "查看提交" },
-                            { iconName: "help circle", url: "/doc/tqb", text: "第一届简介" },
-                            { iconName: "help circle", url: "/doc/tqb-2nd", text: "第二届简介" },
-                            { iconName: "address book", url: "/doc/staff", text: "Staff简介" },
-                            { iconName: "archive", url: "/doc/scene", text: "剧情简介" },
-                            (props.state.userState.userData.is_all_unlocked && { iconName: "recycle", url: "/godmode/list", text: "所有题目与剧情" })
-                        ] as Array<{ iconName: SemanticICONS; url: string; text: string; }>).map(item => item && <Grid.Column key={item.url}>
-                            <GNAQButton {...item}></GNAQButton>
-                        </Grid.Column>)}
-                    </Grid>
-                </Segment>
+                <Grid columns="1">
+                    <Grid.Column>
+                        <Segment stacked>
+                            <Header as="h1">
+                                菜单
+                            </Header>
+                            <Grid columns="4">
+                                {([
+                                    (props.state.userState.login) && { iconName: "play", url: "/game/subject", text: "开始" },
+                                    (props.state.userState.login) && { iconName: "signal", url: "/ranklist", text: "排行榜" },
+                                    (props.state.userState.login) && { iconName: "tasks", url: "/game/submission", text: "查看提交" },
+                                    { iconName: "help circle", url: "/doc/tqb", text: "第一届简介" },
+                                    { iconName: "help circle", url: "/doc/tqb-2nd", text: "第二届简介" },
+                                    { iconName: "address book", url: "/doc/staff", text: "Staff简介" },
+                                    { iconName: "archive", url: "/doc/scene", text: "剧情简介" },
+                                    (props.state.userState.userData.is_all_unlocked && { iconName: "recycle", url: "/godmode/list", text: "所有题目与剧情" })
+                                ] as Array<{ iconName: SemanticICONS; url: string; text: string; }>).map(item => item && <Grid.Column key={item.url}>
+                                    <GNAQButton {...item}></GNAQButton>
+                                </Grid.Column>)}
+                            </Grid>
+                        </Segment>
+                    </Grid.Column>
+                    <Grid.Column >
+                        <Segment stacked>
+                            <Header as="h1">
+                                捐助
+                            </Header>
+                            <Divider></Divider>
+                            <Grid columns="2">
+                                <Grid.Column>
+                                    <Image src={AlipayDonationImage}></Image>
+                                </Grid.Column>
+                                <Grid.Column>
+                                    <Image src={WechatDonationImage}></Image>
+                                </Grid.Column>
+                            </Grid>
+                        </Segment>
+                    </Grid.Column>
+                </Grid>
             </Grid.Column>
             {props.state.userState.login && <Grid.Column >
                 <Segment stacked>
@@ -84,24 +104,7 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                 </Segment>
             </Grid.Column>}
 
-            <Grid.Column >
-                <Segment stacked>
-                    <Header as="h1">
-                        捐助
-                    </Header>
-                    <Divider></Divider>
-                    <div>
-                        <Grid columns="2">
-                            <Grid.Column>
-                                <Image src={AlipayDonationImage}></Image>
-                            </Grid.Column>
-                            <Grid.Column>
-                                <Image src={WechatDonationImage}></Image>
-                            </Grid.Column>
-                        </Grid>
-                    </div>
-                </Segment>
-            </Grid.Column>
+
         </Grid>
     </div>;
 };
