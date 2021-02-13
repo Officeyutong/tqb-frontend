@@ -7,6 +7,13 @@ module.exports = {
                 options: {
                     name: "static/media/[name].[ext]"
                 }
+            },
+            {
+                test: [/\.ttf$/],
+                loader: require.resolve('url-loader'),
+                options: {
+                    name: "static/fonts/[name].[ext]"
+                }
             }
         ]
     }
