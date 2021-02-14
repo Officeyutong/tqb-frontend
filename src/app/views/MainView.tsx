@@ -53,7 +53,7 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
             </Button>
         </Segment>}
         {props.state.userState.login && <GraphView></GraphView>}
-        <Grid columns="2" >
+        <Grid columns="2">
             <Grid.Column>
                 <Segment stacked>
                     <Header as="h1">
