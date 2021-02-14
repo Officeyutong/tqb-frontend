@@ -63,9 +63,10 @@ const GraphView: React.FC<PropsType> = (props) => {
             }
         })).filter(x => (x.data.source !== MONGODB_NULL && x.data.target !== MONGODB_NULL))
     ];
-    return <Segment><div style={{
+    return <Segment stacked><div style={{
         overflowX: "scroll",
-        overflowY: "scroll"
+        overflowY: "scroll",
+        height: "300px"
     }}>
         <CytoscapeComponent
             maxZoom={3}
@@ -76,8 +77,8 @@ const GraphView: React.FC<PropsType> = (props) => {
                 name: "cose"
             }}
             style={{
-                width: "600px",
-                height: "600px",
+                width: "100%",
+                height: "100%",
             }}
         ></CytoscapeComponent>
 
