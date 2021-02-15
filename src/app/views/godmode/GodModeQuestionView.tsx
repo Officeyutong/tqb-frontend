@@ -2,7 +2,7 @@ import _ from "lodash";
 import React, { useCallback, useEffect, useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { Dimmer, Grid, Header, Loader, Segment, Table } from "semantic-ui-react";
-import { converter } from "../../common/Markdown";
+import { Markdown } from "../../common/Markdown";
 import { wrapDocumentTitle } from "../../common/Utils";
 import { game } from "../../service/Game";
 import { Question, QuestionStatusMapping, Submission, SubQuestionType } from "../../service/GameTypes";
@@ -85,7 +85,7 @@ const GodModeProblemView: React.FC<RouteComponentProps> = (props) => {
                                 </Table.Body>
                             </Table>
                         })()}
-                        <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.desc) }}></div>
+                        <Markdown markdown={data.desc}></Markdown>
                         {shouldUsePlayer() && <audio src={data.audio} controls={true}>
                         </audio>}
                     </Segment>

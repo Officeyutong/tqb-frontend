@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Divider, Grid, Header, Item, Placeholder, Segment } from "semantic-ui-react";
 import { useDocumentTitle } from "../../common/Utils";
 import _ from "lodash";
-import { converter } from "../../common/Markdown";
+import { Markdown } from "../../common/Markdown";
 interface StaffMember {
     id: string;
     school: string;
@@ -33,7 +33,7 @@ const MemberCard: React.FC<MemberCardPropsType> = ({ data }) => {
                         </Item.Header>
                         <Item.Meta>{data.school}</Item.Meta>
                         <Item.Description>
-                            <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.description) }}></div>
+                            <Markdown markdown={data.description}></Markdown>
                         </Item.Description>
                     </Item.Content>
                 </Item>

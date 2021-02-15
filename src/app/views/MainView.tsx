@@ -75,18 +75,24 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                     </Grid>
                 </Segment>
             </Grid.Column>
-            <Grid.Column >
+            <Grid.Column>
                 <Segment stacked>
                     <Header as="h1">
                         捐助
                     </Header>
                     <Divider></Divider>
                     <Grid columns="2">
-                        <Grid.Column>
-                            <Image src={AlipayDonationImage}></Image>
+                        <Grid.Column >
+                            <Header as="h2">
+                                支付宝
+                            </Header>
+                            <Image centered size="small" src={AlipayDonationImage}></Image>
                         </Grid.Column>
-                        <Grid.Column>
-                            <Image src={WechatDonationImage}></Image>
+                        <Grid.Column >
+                            <Header as="h2">
+                                微信
+                            </Header>
+                            <Image centered size="small" src={WechatDonationImage}></Image>
                         </Grid.Column>
                     </Grid>
                 </Segment>

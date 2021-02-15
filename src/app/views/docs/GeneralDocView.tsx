@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { converter } from "../../common/Markdown";
+import { Markdown } from "../../common/Markdown";
 import { useDocumentTitle } from "../../common/Utils";
 import axios from "axios";
 import {
@@ -40,7 +40,7 @@ const DocView: React.FC<DocViewPropsType> = ({ path, title }) => {
                     <Loader></Loader>
                 </Dimmer>
             </>}
-            <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(doc) }}></div>
+            <Markdown markdown={doc}></Markdown>
         </Segment>
     </div>
 };

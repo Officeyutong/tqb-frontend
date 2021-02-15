@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Button, Checkbox, Form, Grid, Message, Progress, Segment } from "semantic-ui-react";
-import { converter } from "../../common/Markdown";
+import { Markdown } from "../../common/Markdown";
 import { NonSelectionSubquestion, SelectionSubquestion } from "../../service/GameTypes";
 import { BACKEND_BASE_URL, axiosObj as axios } from "../../App";
 import "./LinkButton.css";
@@ -39,7 +39,7 @@ const SelectionSubquestionComponent: React.FC<SelectionSubquestionProps> = ({ da
     };
     return <div>
         <span>本题满分 <span style={{ color: "red" }}>{data.full_point} 分</span>，部分得分 <span style={{ color: "red" }}>{data.part_point} 分</span>。</span>
-        <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.desc) }}></div>
+        <Markdown markdown={data.desc}></Markdown>
         <Segment stacked>
 
             <Grid columns="1">
@@ -65,7 +65,7 @@ const SelectionSubquestionComponent: React.FC<SelectionSubquestionProps> = ({ da
                             >
 
                             </Checkbox>
-                            <div style={{ marginLeft: "5px" }} dangerouslySetInnerHTML={{ __html: converter.makeHtml(item) }}></div>
+                            <Markdown style={{ marginLeft: "5px" }} markdown={item} ></Markdown>
                         </Form.Field>)}
                     </Form>
                 </Grid.Column>
@@ -114,7 +114,7 @@ const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> =
     };
     return <div>
 
-        <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.desc) }}></div>
+        <Markdown markdown={data.desc}></Markdown>
         <Segment stacked>
             {error && <Message
                 error
@@ -128,8 +128,8 @@ const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> =
                     {userSubmission === null ? <div>
                         您尚未作答过本题
                     </div> : <div>
-                            您作答过本题，<button type="button" className="link-button" onClick={() => doDownload()}>点此下载</button>
-                        </div>}
+                        您作答过本题，<button type="button" className="link-button" onClick={() => doDownload()}>点此下载</button>
+                    </div>}
                 </Grid.Column>
                 <Grid.Column>
                     {allowEdit && <Grid columns="1">
@@ -144,7 +144,7 @@ const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> =
                             </Grid>
                         </Grid.Column>
                         <Grid.Column>
-                            {uploading && <Progress progress percent={Math.ceil(percent*100)/100} indicating></Progress>}
+                            {uploading && <Progress progress percent={Math.ceil(percent * 100) / 100} indicating></Progress>}
                         </Grid.Column>
                     </Grid>}
                 </Grid.Column>

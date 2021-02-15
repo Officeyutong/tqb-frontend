@@ -6,7 +6,7 @@ import { game, MONGODB_NULL } from "../../service/Game";
 import { wrapDocumentTitle } from "../../common/Utils";
 import { Dimmer, Header, Loader, Segment, Grid, Divider, Button } from "semantic-ui-react";
 import {
-    converter
+    Markdown
 } from "../../common/Markdown";
 import { refreshUserAndGameData } from "../../App";
 type SceneDetail = Scene<true>;
@@ -50,7 +50,7 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
                             {data!.title}
                         </Header>
                         <Segment stacked>
-                            <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.text) }}></div>
+                            <Markdown markdown={data.text}></Markdown>
 
                             {data.next_question !== MONGODB_NULL && <>
                                 <Divider></Divider>

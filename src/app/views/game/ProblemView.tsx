@@ -3,7 +3,7 @@ import { game, MONGODB_NULL } from "../../service/Game";
 import { Question, QuestionStatus, QuestionStatusMapping, Submission, SubQuestionType } from "../../service/GameTypes";
 import { user } from "../../service/User";
 import {
-    converter
+    Markdown
 } from "../../common/Markdown";
 
 import { withRouter, RouteComponentProps, useHistory } from "react-router-dom";
@@ -254,7 +254,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                     </Table>
                                 })()}
                                 <Divider></Divider>
-                                <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.desc) }}></div>
+                                <Markdown markdown={data.desc}></Markdown>
                                 {shouldUsePlayer() && <audio ref={audioRef} src={data.audio} controls={data.time_limit === 0}>
                                 </audio>}
                             </Segment>
@@ -280,7 +280,7 @@ const ProblemView: React.FC<RouteComponentProps> = (props) => {
                                     case QuestionStatus.ANSWERING:
                                         return <>
                                             {data.statement && <Segment stacked>
-                                                <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(data.statement) }}></div>
+                                                <Markdown markdown={data.statement}></Markdown>
                                             </Segment>}
                                             {(shouldUsePlayer() ? audioLoaded : true) && data.sub_question.map((item, i) => <div key={i} style={{ marginBottom: "30px" }}>
                                                 <Segment stacked>
