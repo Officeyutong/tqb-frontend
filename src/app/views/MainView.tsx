@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 import GraphView from "./GraphView";
 import AlipayDonationImage from "../../assets/donation/alipay.png";
 import WechatDonationImage from "../../assets/donation/wechat.png";
+import { Markdown } from "../common/Markdown";
 
 const GNAQButton: React.FC<{ iconName: SemanticICONS; url: string; text: string }> = ({ iconName, text, url }) => {
     return <Link to={url} style={{ color: "#1b1c1d" }}>
@@ -78,8 +79,9 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
             <Grid.Column>
                 <Segment stacked>
                     <Header as="h1">
-                        捐助
+                        投喂
                     </Header>
+                    <Markdown markdown={"喵~"}></Markdown>
                     <Divider></Divider>
                     <Grid columns="2">
                         <Grid.Column >
