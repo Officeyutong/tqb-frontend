@@ -46,7 +46,7 @@ const converter = new showdown.Converter({
 const Markdown = connect((state: StateType) => ({ state: state }))
     (((props) => {
         const { markdown } = props;
-        return <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(markdown) }} {...(_.omit(props, ["markdown", "state"]))} >
+        return <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(markdown) }} {...(_.omit(props, ["markdown", "state", "dispatch"]))} >
 
         </div>
     }) as React.FC<{ markdown: string, state: StateType } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>>);
