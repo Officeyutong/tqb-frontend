@@ -95,6 +95,11 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                             <Image centered size="small" src={WechatDonationImage}></Image>
                         </Grid.Column>
                     </Grid>
+                    <Grid columns="3" centered>
+                        <Grid.Column textAlign="center">
+                            <a href="https://shimo.im/sheets/YSVhatjoTkgsOYsz/wAsu7" target="_blank" rel="noreferrer">收支公示</a>
+                        </Grid.Column>
+                    </Grid>
                 </Segment>
             </Grid.Column>
         </Grid>
