@@ -8,8 +8,8 @@ import {
     Icon,
     SemanticICONS,
     Header,
-    Image,
-    Divider,
+    // Image,
+    // Divider,
 } from "semantic-ui-react";
 import {
     useDocumentTitle,
@@ -20,9 +20,9 @@ import "./gnaq-button.css";
 import { axiosObj as axios, DEBUG_MODE } from "../App";
 import { Link } from "react-router-dom";
 import GraphView from "./GraphView";
-import AlipayDonationImage from "../../assets/donation/alipay.png";
-import WechatDonationImage from "../../assets/donation/wechat.png";
-import { Markdown } from "../common/Markdown";
+// import AlipayDonationImage from "../../assets/donation/alipay.png";
+// import WechatDonationImage from "../../assets/donation/wechat.png";
+// import { Markdown } from "../common/Markdown";
 
 const GNAQButton: React.FC<{ iconName: SemanticICONS; url: string; text: string }> = ({ iconName, text, url }) => {
     return <Link to={url} style={{ color: "#1b1c1d" }}>
@@ -76,7 +76,7 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                     </Grid>
                 </Segment>
             </Grid.Column>
-            <Grid.Column>
+            {/* <Grid.Column>
                 <Segment stacked>
                     <Header as="h1">
                         投喂
@@ -103,7 +103,7 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                         </Grid.Column>
                     </Grid>
                 </Segment>
-            </Grid.Column>
+            </Grid.Column> */}
         </Grid>
     </div>
 };
