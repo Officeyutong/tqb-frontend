@@ -126,7 +126,7 @@ const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> =
                 <Grid.Column>
                     <span>本题满分 <span style={{ color: "red" }}>{data.full_point} 分</span>。</span>
                     {userSubmission === null ? <div>
-                        您尚未作答过本题
+                        您尚未作答过本题。允许上传pdf/txt/jpg(jpeg)/png/bmp格式的文件。
                     </div> : <div>
                         您作答过本题，<button type="button" className="link-button" onClick={() => doDownload()}>点此下载</button>
                     </div>}
@@ -136,7 +136,7 @@ const NonSelectionSubquestionComponent: React.FC<NonSelectionSubquestionProps> =
                         <Grid.Column>
                             <Grid columns="2">
                                 <Grid.Column>
-                                    <input type="file" ref={uploadElement} accept="application/pdf"></input>
+                                    <input type="file" ref={uploadElement} accept="application/pdf,text/plain,image/jpeg,image/png,image/bmp" ></input>
                                 </Grid.Column>
                                 <Grid.Column>
                                     <Button onClick={() => doUpload()} color="blue" size="small" loading={uploading}>上传</Button>
