@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Dimmer, Header, Item, Loader, Segment, Statistic } from "semantic-ui-react";
+import { Dimmer, Header, Item, Label, Loader, Segment, Statistic } from "semantic-ui-react";
 import { axiosObj as axios } from "../../App";
 import { makeGravatarImageURL, useDocumentTitle } from "../../common/Utils";
+import { user } from "../../service/User";
 
 interface RanklistItem {
     username: string;
@@ -42,7 +43,10 @@ const RanklistView: React.FC = () => {
                             <Item.Header>
                                 #{i + 1}. {item.username}
                             </Item.Header>
-                            <Item.Meta>{item.email}</Item.Meta>
+                            {/* <Item.Meta>{item.email}</Item.Meta> */}
+                            {user.getUserInfo().email === item.email && <Item.Meta>
+                                <Label color="blue">我自己</Label>
+                            </Item.Meta>}
                             <Item.Description>
                                 <Statistic color="blue">
                                     <Statistic.Value>
