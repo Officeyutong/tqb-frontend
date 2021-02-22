@@ -19,7 +19,7 @@ import "./gnaq-button.css";
 
 import { axiosObj as axios, DEBUG_MODE } from "../App";
 import { Link } from "react-router-dom";
-import GraphView from "./GraphView";
+// import GraphView from "./GraphView";
 // import AlipayDonationImage from "../../assets/donation/alipay.png";
 // import WechatDonationImage from "../../assets/donation/wechat.png";
 // import { Markdown } from "../common/Markdown";
@@ -53,7 +53,7 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                 重置数据
             </Button>
         </Segment>}
-        {props.state.userState.login && <GraphView></GraphView>}
+        {/* {props.state.userState.login && <GraphView></GraphView>} */}
         <Grid columns="2">
             <Grid.Column>
                 <Segment stacked>

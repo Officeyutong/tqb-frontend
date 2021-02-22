@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { withRouter, RouteComponentProps, useHistory } from "react-router-dom";
 import { Scene } from "../../service/GameTypes";
 import { game, MONGODB_NULL } from "../../service/Game";
 import { wrapDocumentTitle } from "../../common/Utils";
-import { Dimmer, Header, Loader, Segment, Grid, Divider, Button } from "semantic-ui-react";
+import { Dimmer, Header, Loader, Segment, Grid, Divider, Button, Icon } from "semantic-ui-react";
 import {
     Markdown
 } from "../../common/Markdown";
@@ -15,6 +15,9 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
     const [loaded, setLoaded] = useState(false);
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState<SceneDetail | null>(null);
+    const [audioLoaded, setAudioLoaded] = useState(false);
+    const [audioLoading, setAudioLoading] = useState(false);
+    const audioRef = useRef<HTMLAudioElement>(null);
     const history = useHistory();
     useEffect(() => {
         if (!loaded) {
@@ -26,10 +29,19 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
                 setLoading(false);
                 setData(data);
                 setLoaded(true);
+                setAudioLoading(true);
             })();
             return () => { document.title = "退群杯"; }
         }
     }, [loaded, sceneID]);
+    useEffect(() => {
+        if (loaded) {
+            audioRef.current!.oncanplaythrough = () => {
+                setAudioLoaded(true);
+                setAudioLoading(false);
+            };
+        }
+    }, [loaded]);
     return <div>
 
         {loading && <Segment stacked>
@@ -50,6 +62,19 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
                             {data!.title}
                         </Header>
                         <Segment stacked>
+                            {data.bgm && <>
+                                <audio src={data.bgm} ref={audioRef}></audio>
+                                {audioLoading && <Button color="blue" icon labelPosition="left">
+                                    <Icon name="spinner" loading></Icon>
+                                        加载BGM中
+                                    </Button>}
+                                {audioLoaded && <Button color="blue" icon labelPosition="left" onClick={() => audioRef.current!.play()}>
+                                    <Icon name="checkmark"></Icon>
+                                        播放BGM
+                                    </Button>}
+                                <Divider></Divider>
+                            </>}
+
                             <Markdown markdown={data.text}></Markdown>
 
                             {data.next_question !== MONGODB_NULL && <>

@@ -50,7 +50,7 @@ type Scene<withDetails>
         next_question: string;
         title: string;
 
-    } & (withDetails extends true ? { text: string; } : {});
+    } & (withDetails extends true ? { text: string; bgm: string; } : {});
 
 interface Submission {
     _id: string;

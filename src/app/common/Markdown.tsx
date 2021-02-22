@@ -4,31 +4,30 @@ import katex from "katex";
 import { StateType, store } from "../states/Manager";
 import { connect } from "react-redux";
 import _ from "lodash";
-const htmlDecode = (input: string) => {
-    let doc = new DOMParser().parseFromString(input, "text/html");
-    return doc.documentElement.textContent || "";
 
-};
+const TREMA = String.fromCharCode(168);
+const DOLLARD_CHR = TREMA + "D";
 const converter = new showdown.Converter({
     extensions: [
         {
-            type: 'output', regex: /\$\$([\S\s]+?)\$\$/g, replace: (x: string, y: string) => {
-                let result = katex.renderToString(htmlDecode(y), {
-                    throwOnError: false,
+            type: 'lang', regex: `${DOLLARD_CHR}${DOLLARD_CHR}([\\S\\s]+?)${DOLLARD_CHR}${DOLLARD_CHR}`, replace: (x: string, y: string) => {
+                let result = katex.renderToString(y, {
+                    throwOnError: true,
                     displayMode: true
                 });
                 return result;
             }
         },
         {
-            type: 'output', regex: /\$([\S\s]+?)\$/g, replace: (x: string, y: string) => {
-                let result = katex.renderToString(htmlDecode(y), {
-                    throwOnError: false,
+            type: 'lang', regex: `${DOLLARD_CHR}([\\S\\s]+?)${DOLLARD_CHR}`, replace: (x: string, y: string) => {
+                let result = katex.renderToString(y, {
+                    throwOnError: true,
                     displayMode: false
                 });
                 return result;
             }
-        }, {
+        },
+        {
             type: "output",
             regex: /!!!user-id!!!/g,
             replace: (x: string, y: string) => {
