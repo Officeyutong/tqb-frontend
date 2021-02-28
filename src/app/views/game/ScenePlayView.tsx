@@ -4,21 +4,26 @@ import { withRouter, RouteComponentProps, useHistory } from "react-router-dom";
 import { Scene } from "../../service/GameTypes";
 import { game, MONGODB_NULL } from "../../service/Game";
 import { wrapDocumentTitle } from "../../common/Utils";
-import { Dimmer, Header, Loader, Segment, Grid, Divider, Button, Icon } from "semantic-ui-react";
+import { Dimmer, Header, Loader, Segment, Grid, Divider, Button } from "semantic-ui-react";
 import {
     Markdown
 } from "../../common/Markdown";
 import { refreshUserAndGameData } from "../../App";
 type SceneDetail = Scene<true>;
+/*
+BGM: /static/audio/final_phase.mp3
+*/
 const ScenePlayView: React.FC<RouteComponentProps> = props => {
     const sceneID = (props.match.params as { id: string }).id;
     const [loaded, setLoaded] = useState(false);
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState<SceneDetail | null>(null);
-    const [audioLoaded, setAudioLoaded] = useState(false);
-    const [audioLoading, setAudioLoading] = useState(false);
+    // const [audioLoaded, setAudioLoaded] = useState(false);
+    // const [audioLoading, setAudioLoading] = useState(false);
     const audioRef = useRef<HTMLAudioElement>(null);
+    // const BGMPlayButtonRef = useRef<HTMLButtonElement>(null);
     const history = useHistory();
+
     useEffect(() => {
         if (!loaded) {
             (async () => {
@@ -29,7 +34,18 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
                 setLoading(false);
                 setData(data);
                 setLoaded(true);
-                setAudioLoading(true);
+                // setAudioLoading(true);
+                {
+                    const BGMButton = document.getElementById("bgm-button") as HTMLButtonElement;
+                    const BGMButtonText = document.getElementById("bgm-button-text");
+                    if (BGMButton) {
+                        BGMButtonText!.innerText = "加载BGM中";
+                        const BGMIcon = document.getElementById("bgm-button-icon")!;
+                        BGMIcon.classList.add("spinner", "loading");
+
+                    }
+
+                }
             })();
             return () => { document.title = "退群杯"; }
         }
@@ -37,8 +53,19 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
     useEffect(() => {
         if (loaded) {
             audioRef.current!.oncanplaythrough = () => {
-                setAudioLoaded(true);
-                setAudioLoading(false);
+                // setAudioLoaded(true);
+                // setAudioLoading(false);
+                const BGMButton = document.getElementById("bgm-button") as HTMLButtonElement;
+                if (BGMButton) {
+                    const BGMButtonText = document.getElementById("bgm-button-text")!;
+                    const BGMIcon = document.getElementById("bgm-button-icon")!;
+                    BGMIcon.classList.remove("spinner", "loading");
+                    BGMIcon.classList.add("checkmark");
+                    BGMButtonText.innerText = "播放BGM";
+                    BGMButton.onclick = () => {
+                        audioRef.current!.play();
+                    };
+                }
             };
         }
     }, [loaded]);
@@ -52,7 +79,6 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
                 <div style={{ minHeight: "300px" }}>
                 </div>
             </>
-
         </Segment>}
         {(loaded && data !== null) && <>
             <Grid columns="3" centered>
@@ -62,8 +88,9 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
                             {data!.title}
                         </Header>
                         <Segment stacked>
-                            {data.bgm && <>
-                                <audio src={data.bgm} ref={audioRef}></audio>
+                            <audio src={data.bgm} ref={audioRef}></audio>
+                            {/* {data.bgm && <>
+                                
                                 {audioLoading && <Button color="blue" icon labelPosition="left">
                                     <Icon name="spinner" loading></Icon>
                                         加载BGM中
@@ -73,7 +100,7 @@ const ScenePlayView: React.FC<RouteComponentProps> = props => {
                                         播放BGM
                                     </Button>}
                                 <Divider></Divider>
-                            </>}
+                            </>} */}
 
                             <Markdown markdown={data.text}></Markdown>
 

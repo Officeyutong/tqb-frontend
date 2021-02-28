@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import { withRouter, RouteComponentProps, useHistory } from "react-router-dom";
-import { Button, Dimmer, Grid, Header, Loader, Segment } from "semantic-ui-react";
+import { Button, Dimmer, Divider, Grid, Header, Loader, Segment } from "semantic-ui-react";
+import { Markdown } from "../../common/Markdown";
 import { useDocumentTitle } from "../../common/Utils";
 import { game } from "../../service/Game";
 import { Question } from "../../service/GameTypes";
@@ -50,6 +51,10 @@ const NextSceneChooseView: React.FC<RouteComponentProps> = (props) => {
                         </Loader>
                     </Dimmer>
                     {loaded && (data !== null) && <Grid columns="1">
+                        {data.next_scene_text !== "" && <>
+                            <Markdown markdown={data.next_scene_text}></Markdown>
+                            <Divider></Divider>
+                        </>}
                         {data.next_scene.map((item, i) => <Grid.Column key={i}>
                             <Button color="blue" onClick={() => doUnlock(item.scene)}>
                                 {item.option} {game.getFirstSubmissionByQuestion(game.getSceneByID(item.scene).next_question)?.is_time_out && "(已超时)"}

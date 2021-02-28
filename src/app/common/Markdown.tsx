@@ -1,6 +1,6 @@
 import React from "react";
 import showdown from "showdown";
-import katex from "katex";
+import { renderKatex } from "./katex-wrapper";
 import { StateType, store } from "../states/Manager";
 import { connect } from "react-redux";
 import _ from "lodash";
@@ -11,20 +11,23 @@ const converter = new showdown.Converter({
     extensions: [
         {
             type: 'lang', regex: `${DOLLARD_CHR}${DOLLARD_CHR}([\\S\\s]+?)${DOLLARD_CHR}${DOLLARD_CHR}`, replace: (x: string, y: string) => {
-                let result = katex.renderToString(y, {
-                    throwOnError: true,
-                    displayMode: true
-                });
-                return result;
+                return renderKatex(y, true);
             }
         },
         {
             type: 'lang', regex: `${DOLLARD_CHR}([\\S\\s]+?)${DOLLARD_CHR}`, replace: (x: string, y: string) => {
-                let result = katex.renderToString(y, {
-                    throwOnError: true,
-                    displayMode: false
-                });
-                return result;
+                return renderKatex(y, false);
+
+            }
+        },
+        {
+            type: 'lang', regex: `!!!bgm!!!`, replace: (x: string, y: string) => {
+                return `<div>
+                <button class="ui blue labeled icon button" id="bgm-button">
+                <i class="icon" id="bgm-button-icon"></i>
+                <div id="bgm-button-text"></div>
+                </div>
+                </div>`;
             }
         },
         {

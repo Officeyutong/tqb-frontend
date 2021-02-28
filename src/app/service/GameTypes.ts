@@ -36,6 +36,7 @@ type Question<withDetails> = {
     audio: string;
     time_limit: number;
     next_scene: Array<{ scene: string; option: string; }>;
+    next_scene_text: string;
 } : { next_scene: Array<string>; });
 interface Subject {
     abbr: string;
