@@ -22,7 +22,7 @@ const LoginView: React.FC<{}> = () => {
         }
         try {
             setLoading(true);
-            await user.login(email, password);
+            await user.login(email.toLowerCase(), password);
             window.location.href = "/";
         } catch (e) {
             console.error(e);

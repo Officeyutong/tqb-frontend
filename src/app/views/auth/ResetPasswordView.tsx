@@ -60,7 +60,7 @@ const ResetPasswordView: React.FC<{}> = () => {
         }
         try {
             setLoading(true);
-            await user.modifyPasswordWithoutLogin(password.value, email.value, token.value);
+            await user.modifyPasswordWithoutLogin(password.value, email.value.toLowerCase(), token.value);
             showSuccessModal("重置完成，请登录.");
         } catch (e) {
             console.error(e);

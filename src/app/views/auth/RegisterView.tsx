@@ -49,7 +49,7 @@ const RegisterView: React.FC<{}> = () => {
         }
         try {
             setLoading(true);
-            await user.register(email.value, username.value, password.value);
+            await user.register(email.value.toLowerCase(), username.value, password.value);
             await sendEmail();
             showSuccessModal("一封包含验证码的邮件已经发送到您邮箱(的垃圾箱)，请注意查收.");
         } catch (e) {
