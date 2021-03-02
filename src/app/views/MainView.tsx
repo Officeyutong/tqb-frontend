@@ -80,13 +80,13 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                         ] as Array<{ iconName: SemanticICONS; url: string; text: string; }>).map(item => item && <Grid.Column key={item.url}>
                             <GNAQButton {...item}></GNAQButton>
                         </Grid.Column>)}
-                        <Grid.Column>
+                        {(props.state.userState.login) && <Grid.Column>
                             <GNAQButton iconName="trash" text="重置数据" action={() => {
                                 showConfirm("您确定要重置数据吗？", async () => {
                                     await debugReset();
                                 });
                             }}></GNAQButton>
-                        </Grid.Column>
+                        </Grid.Column>}
                     </Grid>
                 </Segment>
             </Grid.Column>
