@@ -5,6 +5,7 @@ import { StateType, store } from "../states/Manager";
 import { connect } from "react-redux";
 import _ from "lodash";
 
+
 const TREMA = String.fromCharCode(168);
 const DOLLARD_CHR = TREMA + "D";
 const converter = new showdown.Converter({

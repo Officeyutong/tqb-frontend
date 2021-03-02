@@ -19,26 +19,33 @@ import "./gnaq-button.css";
 
 import { axiosObj as axios, DEBUG_MODE } from "../App";
 import { Link } from "react-router-dom";
+import { showConfirm } from "../dialogs/Dialog";
 // import GraphView from "./GraphView";
 // import AlipayDonationImage from "../../assets/donation/alipay.png";
 // import WechatDonationImage from "../../assets/donation/wechat.png";
 // import { Markdown } from "../common/Markdown";
 
-const GNAQButton: React.FC<{ iconName: SemanticICONS; url: string; text: string }> = ({ iconName, text, url }) => {
-    return <Link to={url} style={{ color: "#1b1c1d" }}>
-        <div className="gnaq-main-button" style={{ cursor: "pointer" }}>
-            <div className="gnaq-mn-btn-logo-hover">
-                <div className="gnaq-mn-btn-logo">
-                    <Icon aria-hidden="true" name={iconName as SemanticICONS}></Icon>
-                </div>
-            </div>
-            <div className="gnaq-mn-btn-text-hover">
-                <div className="gnaq-mn-btn-text">
-                    {text}
-                </div>
+const GNAQButton: React.FC<{ iconName: SemanticICONS; url?: string; text: string; action?: () => void }> = ({ iconName, text, url, action }) => {
+    const InnerItems = <div className="gnaq-main-button" style={{ cursor: "pointer" }}>
+        <div className="gnaq-mn-btn-logo-hover">
+            <div className="gnaq-mn-btn-logo">
+                <Icon aria-hidden="true" name={iconName as SemanticICONS}></Icon>
             </div>
         </div>
-    </Link>
+        <div className="gnaq-mn-btn-text-hover">
+            <div className="gnaq-mn-btn-text">
+                {text}
+            </div>
+        </div>
+    </div>;
+    return <>
+        {url && <Link to={url} style={{ color: "#1b1c1d" }}>
+            {InnerItems}
+        </Link>}
+        {action && <div onClick={action}>
+            {InnerItems}
+        </div>}
+    </>;
 };
 
 const MainView: React.FC<{ state: StateType }> = (props) => {
@@ -73,6 +80,13 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                         ] as Array<{ iconName: SemanticICONS; url: string; text: string; }>).map(item => item && <Grid.Column key={item.url}>
                             <GNAQButton {...item}></GNAQButton>
                         </Grid.Column>)}
+                        <Grid.Column>
+                            <GNAQButton iconName="trash" text="重置数据" action={() => {
+                                showConfirm("您确定要重置数据吗？", async () => {
+                                    await debugReset();
+                                });
+                            }}></GNAQButton>
+                        </Grid.Column>
                     </Grid>
                 </Segment>
             </Grid.Column>
