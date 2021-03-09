@@ -23,7 +23,7 @@ const useInputValue: (text?: string) => { value: string; onChange: onChangeType 
 
 const makeGravatarImageURL: (email: string) => string = (email) => {
     const hashval = md5(email.trim().toLowerCase());
-    return `https://www.gravatar.com/avatar/${hashval}`;
+    return `https://gravatar.loli.net/avatar/${hashval}`;
 };
 
 export {
