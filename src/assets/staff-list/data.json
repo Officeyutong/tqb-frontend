@@ -28,6 +28,47 @@
         ]
     },
     {
+        "groupName": "运营组",
+        "members": [
+            {
+                "id": "Eleven",
+                "school": "四川大学/SCU",
+                "description": "路线设计  不咕咕",
+                "profileImage": "Eleven.png"
+            },
+            {
+                "id": "teafrogsf",
+                "school": "市立张江理工养鸽场大学/ShanghaiTech-CS",
+                "description": " 剧情撰写 & 路线设计  总算给自己找到个名头了我就是要在每个组都出现而且还比fbhou多一次好耶",
+                "profileImage": "teafrogsf.png"
+            },
+            {
+                "id": "fbhou",
+                "school": "上海交通大学/SJTU",
+                "description": "财务 & 路线设计 & pusher  感谢退群杯让我财源广进（什",
+                "profileImage": "fbhou.png"
+            },
+            {
+                "id": "Arcturus",
+                "school": "衡水第一监狱",
+                "description": "只会水群摸鱼的三岁七  路线设计",
+                "profileImage": "Arcturus.png"
+            },
+            {
+                "id": "小黑AWM",
+                "school": "",
+                "description": "路线设计",
+                "profileImage": "Arcturus.png"
+            },
+            {
+                "id": "wjyyy",
+                "school": "武汉大学/WHU-CS",
+                "description": "路线设计",
+                "profileImage": "wjyyy.png"
+            }
+        ]
+    },
+    {
         "groupName": "数学命题组",
         "members": [
             {
@@ -177,6 +218,12 @@
                 "school": "武汉大学/WHU-CS",
                 "description": "我棒读的听力为什么不够棒\n\n饰 Chinese narrator",
                 "profileImage": "wjyyy.png"
+            },
+            {
+                "id": "茗柯子/Cyanoki",
+                "school": "第五音附属中学",
+                "description": "肥啾可爱！茗柯子好菜！  饰 ██████████████████",
+                "profileImage": "Cyanoki.png"
             }
         ]
     },

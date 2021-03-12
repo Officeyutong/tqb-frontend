@@ -25,6 +25,12 @@ import { showConfirm } from "../dialogs/Dialog";
 // import WechatDonationImage from "../../assets/donation/wechat.png";
 // import { Markdown } from "../common/Markdown";
 
+// const COLORS = [
+//     "004C99", "0066CC", "0080FF", "3399FF", "66B2FF", "99CCFF", "CCE5FF"
+// ].map(item => `#${item}`);
+
+// const COLOR_INDEX = 6;
+
 const GNAQButton: React.FC<{ iconName: SemanticICONS; url?: string; text: string; action?: () => void }> = ({ iconName, text, url, action }) => {
     const InnerItems = <div className="gnaq-main-button" style={{ cursor: "pointer" }}>
         <div className="gnaq-mn-btn-logo-hover">
@@ -67,6 +73,10 @@ const MainView: React.FC<{ state: StateType }> = (props) => {
                     <Header as="h1">
                         菜单
                             </Header>
+                    {/* <div>
+                        上方颜色: {COLORS[COLOR_INDEX]}
+                    </div>
+                    <div>下方颜色: {COLORS[COLOR_INDEX - 1]}</div> */}
                     <Grid columns="4">
                         {([
                             (props.state.userState.login) && { iconName: "play", url: "/game/subject", text: "开始" },
