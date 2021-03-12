@@ -16,7 +16,7 @@
             {
                 "id": "MikuNotFoundException",
                 "school": "武汉地质学院/CUG",
-                "description": "摸鱼&写前端的",
+                "description": "摸鱼&写前端",
                 "profileImage": "MnFe.png"
             },
             {
@@ -33,25 +33,25 @@
             {
                 "id": "Eleven",
                 "school": "四川大学/SCU",
-                "description": "路线设计  不咕咕",
+                "description": "路线设计\n\n不咕咕",
                 "profileImage": "Eleven.png"
             },
             {
                 "id": "teafrogsf",
                 "school": "市立张江理工养鸽场大学/ShanghaiTech-CS",
-                "description": " 剧情撰写 & 路线设计  总算给自己找到个名头了我就是要在每个组都出现而且还比fbhou多一次好耶",
+                "description": " 剧情撰写 & 路线设计\n\n总算给自己找到个名头了我就是要在每个组都出现而且还比fbhou多一次好耶",
                 "profileImage": "teafrogsf.png"
             },
             {
                 "id": "fbhou",
                 "school": "上海交通大学/SJTU",
-                "description": "财务 & 路线设计 & pusher  感谢退群杯让我财源广进（什",
+                "description": "财务 & 路线设计 & pusher\n\n感谢退群杯让我财源广进（什",
                 "profileImage": "fbhou.png"
             },
             {
                 "id": "Arcturus",
                 "school": "衡水第一监狱",
-                "description": "只会水群摸鱼的三岁七  路线设计",
+                "description": "只会水群摸鱼的三岁七\n\n路线设计",
                 "profileImage": "Arcturus.png"
             },
             {
@@ -156,7 +156,7 @@
             {
                 "id": "teafrogsf",
                 "school": "上海科技大学/ShanghaiTech-CS",
-                "description": "我当时为什么要手滑接了后期这活  混音 & 音乐制作 & 饰 Prof. Menstein",
+                "description": "我当时为什么要手滑接了后期这活\n\n混音 & 音乐制作 & 饰 Prof. Menstein",
                 "profileImage": "teafrogsf.png"
             },
             {
@@ -222,7 +222,7 @@
             {
                 "id": "茗柯子/Cyanoki",
                 "school": "第五音附属中学",
-                "description": "肥啾可爱！茗柯子好菜！  饰 ██████████████████",
+                "description": "肥啾可爱！茗柯子好菜！\n\n饰 ██████████████████",
                 "profileImage": "Cyanoki.png"
             }
         ]
