@@ -89,6 +89,9 @@ const GodModeProblemView: React.FC<RouteComponentProps> = (props) => {
                         {shouldUsePlayer() && <audio src={data.audio} controls={true}>
                         </audio>}
                     </Segment>
+                    {data.statement && <Segment stacked>
+                        <Markdown markdown={data.statement}></Markdown>
+                    </Segment>}
                     {data.sub_question.map((item, i) => <div key={i}>
                         <Segment stacked>
                             {item.type === SubQuestionType.SELECTION ? <SelectionSubquestionComponent
