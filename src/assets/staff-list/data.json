@@ -56,14 +56,14 @@
             },
             {
                 "id": "小黑AWM",
-                "school": "",
-                "description": "路线设计",
-                "profileImage": "Arcturus.png"
+                "school": "浙江省嘉兴一中",
+                "description": "路线设计\n\n“为自由而战吧，在哪儿都可以。”博客：xiaohei-awm.cn",
+                "profileImage": "小黑AWM.png"
             },
             {
                 "id": "wjyyy",
                 "school": "武汉大学/WHU-CS",
-                "description": "路线设计",
+                "description": "路线设计\n\n欢迎报考武汉大学",
                 "profileImage": "wjyyy.png"
             }
         ]
@@ -156,7 +156,7 @@
             {
                 "id": "teafrogsf",
                 "school": "上海科技大学/ShanghaiTech-CS",
-                "description": "我当时为什么要手滑接了后期这活\n\n混音 & 音乐制作 & 饰 Prof. Menstein",
+                "description": "我当时为什么要手滑接了后期这活\n\n混音 & 音乐制作 & 饰 Leon Heide",
                 "profileImage": "teafrogsf.png"
             },
             {
@@ -176,6 +176,12 @@
                 "school": "圣彼得堡国立大学/SPBU",
                 "description": "乌拉！\n\n饰 Diana Sleyps",
                 "profileImage": "DGL.png"
+            },
+            {
+                "id": "fbhou",
+                "school": "上海交通大学/SJTU",
+                "description": "目标是在每个组露一个脸\n\n饰 Prof. Menstein",
+                "profileImage": "fbhou.png"
             },
             {
                 "id": "Yuzi",
